@@ -10,4 +10,6 @@ router.post("/test", (req, res) => {
   res.json({ requestBody: req.body });
 });
 
+// Restore session user
+
 module.exports = router;
