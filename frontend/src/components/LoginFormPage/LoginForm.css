@@ -1,0 +1,6 @@
+form {
+  display: grid;
+  grid-template-rows: 1fr;
+  width: clamp(400px, 50%, 800px);
+  height: 400px;
+}
