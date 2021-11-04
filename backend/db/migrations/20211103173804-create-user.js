@@ -14,11 +14,11 @@ module.exports = {
       },
       username: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(30),
       },
       email: {
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(256),
       },
       hashed_password: {
         allowNull: false,
@@ -36,10 +36,12 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn("now"),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: Sequelize.fn("now"),
       },
     });
   },
