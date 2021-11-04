@@ -1,6 +1,22 @@
 form {
   display: grid;
   grid-template-rows: 1fr;
-  width: clamp(400px, 50%, 800px);
-  height: 400px;
+  place-items: center;
+  row-gap: 20px;
+  width: 90%;
+  height: 50%;
+}
+input {
+  border-radius: 10px;
+  border: 1px solid black;
+  height: 40px;
+  width: 100%;
+}
+button {
+  background-color: #3b555d;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid black;
+  width: 50%;
+  cursor: pointer;
 }

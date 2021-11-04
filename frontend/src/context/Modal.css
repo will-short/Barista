@@ -15,10 +15,16 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 #modal-content {
   position: absolute;
   background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(400px, 30%, 700px);
+  height: 400px;
+  border-radius: 30px;
 }
