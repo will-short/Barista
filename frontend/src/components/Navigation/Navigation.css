@@ -41,3 +41,6 @@ input[type="reset"] {
   width: fit-content;
   height: fit-content;
 }
+img {
+  width: 100%;
+}
