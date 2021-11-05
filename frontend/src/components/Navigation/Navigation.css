@@ -26,7 +26,7 @@ a#home {
   height: 50px;
 }
 
-button.login {
+button.user {
   background: none;
   color: rgb(38, 38, 38);
   border: none;
@@ -76,24 +76,29 @@ ul {
   align-items: center;
   z-index: 1;
 }
+
 li:first-child {
   border-radius: 6px 6px 0px 0px;
-  padding-top: 10px;
 }
 li:last-child {
   border-radius: 0px 0px 6px 6px;
-  padding-bottom: 10px;
   border-top: 1px solid black;
 }
 li > a {
-  width: 90%;
+  height: 35px;
+  width: calc(100% - 60px);
+  padding-left: 10px;
+  padding-right: 50px;
   color: rgb(38, 38, 38);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 div#position {
   width: 300px;
 }
 button#logout {
-  height: 25px;
+  height: 45px;
   width: 100%;
   font-size: 15px;
   text-align: start;
@@ -104,18 +109,12 @@ button#logout {
     "Lucida Sans", Arial, sans-serif;
 }
 li {
-  width: calc(100% - 60px);
-  padding-left: 10px;
-  padding-right: 50px;
-  height: 35px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  width: 100%;
   background-color: white;
 }
 li:hover {
   background-color: rgb(233, 233, 233);
 }
-li > i {
+li > a > i {
   margin-right: 5px;
 }

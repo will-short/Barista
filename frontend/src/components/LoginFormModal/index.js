@@ -7,7 +7,7 @@ function LoginFormModal() {
 
   return (
     <>
-      <button className="login" onClick={() => setShowModal(true)}>
+      <button className="user" onClick={() => setShowModal(true)}>
         Log In
       </button>
       {showModal && (

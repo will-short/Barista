@@ -37,16 +37,21 @@ function ProfileButton({ user }) {
         {showMenu && (
           <ul className="profile-dropdown">
             <li>
-              <i className="material-icons-outlined">feed</i>
-              <Link>Recent Activity</Link>
+              <Link>
+                <i className="material-icons-outlined">feed</i> Recent Activity
+              </Link>
             </li>
             <li>
-              <i className="material-icons-outlined">account_circle</i>
-              <Link>My Profile</Link>
+              <Link>
+                <i className="material-icons-outlined"> account_circle</i> My
+                Profile
+              </Link>
             </li>
             <li>
-              <i className="material-icons-outlined">manage_accounts</i>
-              <Link>Account Settings</Link>
+              <Link>
+                <i className="material-icons-outlined"> manage_accounts</i>
+                Account Settings
+              </Link>
             </li>
             <li>
               <button id="logout" onClick={logout}>

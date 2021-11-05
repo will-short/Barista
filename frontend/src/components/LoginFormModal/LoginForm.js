@@ -35,6 +35,9 @@ function LoginForm() {
           {errors.includes("Please provide a valid email or username.") && (
             <p>Please provide a valid email or username.</p>
           )}
+          {errors.includes("The provided credentials were invalid.") && (
+            <p>The provided credentials were invalid. Please try again</p>
+          )}
         </div>
         <div>
           <input
