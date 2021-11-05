@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 
 function ProfileButton({ user }) {
@@ -19,7 +20,6 @@ function ProfileButton({ user }) {
     };
 
     document.addEventListener("click", closeMenu);
-
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
@@ -29,20 +29,39 @@ function ProfileButton({ user }) {
   };
 
   return (
-    <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
-      {showMenu && (
-        <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li>
-        </ul>
-      )}
-    </>
+    <div id="position">
+      <div id="profile-container">
+        <button className="profile" onClick={openMenu}>
+          <i class="material-icons-outlined">account_circle</i>
+        </button>
+        {showMenu && (
+          <ul className="profile-dropdown">
+            <li>
+              <Link>
+                <i className="material-icons-outlined">feed</i> Recent Activity
+              </Link>
+            </li>
+            <li>
+              <Link>
+                <i className="material-icons-outlined"> account_circle</i> My
+                Profile
+              </Link>
+            </li>
+            <li>
+              <Link>
+                <i className="material-icons-outlined"> manage_accounts</i>
+                Account Settings
+              </Link>
+            </li>
+            <li>
+              <button id="logout" onClick={logout}>
+                Log Out
+              </button>
+            </li>
+          </ul>
+        )}
+      </div>
+    </div>
   );
 }
 

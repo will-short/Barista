@@ -22,9 +22,10 @@
   position: absolute;
   background-color: white;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: clamp(400px, 30%, 700px);
+  justify-content: flex-start;
+  width: 400px;
   height: 400px;
-  border-radius: 30px;
+  border: 1px solid grey;
 }
