@@ -1,7 +1,6 @@
 {
   "name": "Barista",
   "version": "1.0.0",
-  "description": "This project will take you through connecting a backend built with Express.js and Sequelize to a React-Redux frontend by constructing CRUD (Create, Read, Update, Delete) functionality and connecting the relevant API routes to thunks and components.",
   "main": "index.js",
   "scripts": {
     "heroku-postbuild": "npm run build --prefix frontend",
