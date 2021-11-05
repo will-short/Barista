@@ -19,7 +19,6 @@ function ProfileButton({ user }) {
     };
 
     document.addEventListener("click", closeMenu);
-
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
@@ -29,20 +28,25 @@ function ProfileButton({ user }) {
   };
 
   return (
-    <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
-      </button>
-      {showMenu && (
-        <ul className="profile-dropdown">
-          <li>{user.username}</li>
-          <li>{user.email}</li>
-          <li>
-            <button onClick={logout}>Log Out</button>
-          </li>
-        </ul>
-      )}
-    </>
+    <div id="position">
+      <div id="profile-container">
+        <button className="profile" onClick={openMenu}>
+          <i className="fas fa-user-circle" />
+        </button>
+        {showMenu && (
+          <ul className="profile-dropdown">
+            <li>{user.name}</li>
+            <li>{user.username}</li>
+            <li>{user.email}</li>
+            <li>
+              <button id="logout" onClick={logout}>
+                Log Out
+              </button>
+            </li>
+          </ul>
+        )}
+      </div>
+    </div>
   );
 }
 

@@ -8,9 +8,8 @@ nav {
   border-bottom: 1px solid rgba(128, 128, 128, 0.5);
 }
 nav > * {
-  height: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-around;
 }
 .userAuth {
@@ -24,11 +23,10 @@ a {
 }
 a#home {
   width: 200px;
+  height: 50px;
 }
 
-button.login,
-input[type="submit"],
-input[type="reset"] {
+button.login {
   background: none;
   color: darkslategray;
   border: none;
@@ -41,5 +39,30 @@ input[type="reset"] {
   font-weight: bolder;
 }
 img {
-  width: 100%;
+  height: 100%;
+}
+
+button.profile {
+  width: fit-content;
+  height: fit-content;
+  background: none;
+  margin-top: 10px;
+}
+button.profile > * {
+  height: 30px;
+  width: 30px;
+  font-size: 30px;
+  color: darkslategray;
+}
+div#profile-container {
+  position: absolute;
+  top: 0px;
+  display: flex;
+  min-height: 42px;
+  min-width: 42px;
+  flex-direction: column;
+  align-items: center;
+}
+ul {
+  list-style-type: none;
 }
