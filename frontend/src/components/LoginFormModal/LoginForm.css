@@ -6,6 +6,13 @@ form {
   width: 90%;
   height: 50%;
 }
+form > div {
+  width: 100%;
+}
+p {
+  margin: 0;
+  color: red;
+}
 input {
   border-radius: 10px;
   border: 1px solid black;

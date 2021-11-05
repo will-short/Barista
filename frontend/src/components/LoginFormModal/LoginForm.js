@@ -23,25 +23,28 @@ function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <ul>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-      </ul>
-      <input
-        type="text"
-        value={credential}
-        placeholder="username"
-        onChange={(e) => setCredential(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
+      <div>
+        <input
+          type="text"
+          value={credential}
+          placeholder="username"
+          onChange={(e) => setCredential(e.target.value)}
+        />
+        {errors.includes("Please provide a valid email or username.") && (
+          <p>Please provide a valid email or username.</p>
+        )}
+      </div>
+      <div>
+        <input
+          type="password"
+          placeholder="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {errors.includes("Please provide a password.") && (
+          <p>Please provide a password.</p>
+        )}
+      </div>
       <button type="submit">Log In</button>
     </form>
   );

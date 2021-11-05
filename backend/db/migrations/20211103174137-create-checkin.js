@@ -17,11 +17,6 @@ module.exports = {
       rating: {
         type: Sequelize.NUMERIC(3, 2),
       },
-      badge_id: {
-        allowNull: false,
-        type: Sequelize.INTEGER,
-        references: { model: "Badges" },
-      },
       drink_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
@@ -32,7 +27,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: "Locations" },
       },
-      user_id: {
+      owner_id: {
         allowNull: false,
         type: Sequelize.INTEGER,
         references: { model: "Users" },

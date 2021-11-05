@@ -35,7 +35,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       profile_image: DataTypes.STRING,
       location: DataTypes.STRING,
-      friends: DataTypes.ARRAY(DataTypes.INTEGER),
     },
     {
       defaultScope: {

@@ -32,9 +32,6 @@ module.exports = {
       location: {
         type: Sequelize.STRING,
       },
-      friends: {
-        type: Sequelize.ARRAY(Sequelize.INTEGER),
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

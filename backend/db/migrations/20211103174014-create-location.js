@@ -22,10 +22,6 @@ module.exports = {
       rating: {
         type: Sequelize.NUMERIC(3, 2),
       },
-      coordinates: {
-        allowNull: false,
-        type: Sequelize.ARRAY(Sequelize.NUMERIC),
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
