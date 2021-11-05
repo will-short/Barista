@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileButton from "./ProfileButton";
@@ -22,7 +22,7 @@ function Navigation({ isLoaded }) {
 
   return (
     <nav>
-      <NavLink exact to="/">
+      <NavLink id="home" exact to="/">
         Home
       </NavLink>
       {isLoaded && sessionLinks}
