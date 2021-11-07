@@ -43,6 +43,7 @@ form > div {
 }
 p {
   margin: 0;
+  font-size: 14px;
   margin-left: 5px;
   color: red;
 }
@@ -74,4 +75,21 @@ img.logo {
   height: auto;
   margin-top: 10px;
   margin-bottom: 40px;
+}
+div.img-container {
+  height: 180px;
+  margin-bottom: 25px;
+  display: grid;
+  place-items: center;
+}
+div.img-container > img {
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+}
+div.img-container > label {
+  margin-top: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
 }

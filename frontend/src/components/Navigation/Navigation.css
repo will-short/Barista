@@ -6,6 +6,7 @@ nav {
   justify-content: space-evenly;
   background-color: white;
   border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+  color: rgb(38, 38, 38);
 }
 nav > * {
   display: flex;
@@ -16,11 +17,6 @@ nav > * {
   width: 300px;
 }
 
-a {
-  color: rgb(38, 38, 38);
-  text-decoration: none;
-  font-weight: bolder;
-}
 a#home {
   width: 200px;
   height: 50px;
@@ -28,7 +24,7 @@ a#home {
 
 button.user {
   background: none;
-  color: rgb(38, 38, 38);
+  color: inherit;
   border: none;
   padding: 0;
   font: inherit;
@@ -40,81 +36,4 @@ button.user {
 }
 img {
   height: 100%;
-}
-
-button.profile {
-  width: fit-content;
-  height: fit-content;
-  background: none;
-  margin-top: 20px;
-}
-button.profile > * {
-  height: 40px;
-  width: 40px;
-  font-size: 40px;
-  color: rgb(38, 38, 38);
-}
-div#profile-container {
-  position: absolute;
-  top: 0px;
-  display: flex;
-  min-height: 42px;
-  min-width: 42px;
-  flex-direction: column;
-  align-items: center;
-}
-ul {
-  list-style-type: none;
-  background: white;
-  width: fit-content;
-  border-radius: 6px;
-  box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.0975);
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 1;
-}
-
-li:first-child {
-  border-radius: 6px 6px 0px 0px;
-}
-li:last-child {
-  border-radius: 0px 0px 6px 6px;
-  border-top: 1px solid black;
-}
-li > a {
-  height: 35px;
-  width: calc(100% - 60px);
-  padding-left: 10px;
-  padding-right: 50px;
-  color: rgb(38, 38, 38);
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-div#position {
-  width: 300px;
-}
-button#logout {
-  height: 45px;
-  width: 100%;
-  font-size: 15px;
-  text-align: start;
-  background-color: inherit;
-  color: inherit;
-  font-weight: bolder;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-}
-li {
-  width: 100%;
-  background-color: white;
-}
-li:hover {
-  background-color: rgb(233, 233, 233);
-}
-li > a > i {
-  margin-right: 5px;
 }
