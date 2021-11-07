@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "../../images/Barista-logo-text.png";
-import "./LoginForm.css";
 
 function LoginForm() {
   const dispatch = useDispatch();
   const [credential, setCredential] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,12 +31,7 @@ function LoginForm() {
             placeholder="username or email"
             onChange={(e) => setCredential(e.target.value)}
           />
-          {errors.includes("Please provide a valid email or username.") && (
-            <p>Please provide a valid email or username.</p>
-          )}
-          {errors.includes("The provided credentials were invalid.") && (
-            <p>The provided credentials were invalid. Please try again</p>
-          )}
+          {errors.credential && <p>{errors.credential}</p>}
         </div>
         <div>
           <input
@@ -46,9 +40,7 @@ function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          {errors.includes("Please provide a password.") && (
-            <p>Please provide a password.</p>
-          )}
+          {errors.password && <p>{errors.password}</p>}
         </div>
         <button type="submit">Log In</button>
       </form>
