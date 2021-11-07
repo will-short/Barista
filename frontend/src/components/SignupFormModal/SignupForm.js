@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import logo from "../../images/Barista-logo-text.png";
 
@@ -12,14 +11,12 @@ function SignupForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState([]);
-
-  if (sessionUser) return <Redirect to="/" />;
+  const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
-      setErrors([]);
+      setErrors({});
       return dispatch(
         sessionActions.signup({ name, email, username, password })
       ).catch(async (res) => {
@@ -27,28 +24,23 @@ function SignupForm() {
         if (data && data.errors) setErrors(data.errors);
       });
     }
-    return setErrors([
-      "Confirm Password field must be the same as the Password field",
-    ]);
+    return setErrors({
+      confirmPassword:
+        "Confirm Password field must be the same as the Password field",
+    });
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <img className="logo" src={logo} alt="" />
-
-      <ul>
-        {errors.map((error, idx) => (
-          <li key={idx}>{error}</li>
-        ))}
-      </ul>
       <div>
         <input
           type="text"
           placeholder="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          required
         />
+        <p>{errors.name}</p>
       </div>
       <div>
         <input
@@ -56,8 +48,8 @@ function SignupForm() {
           placeholder="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          required
         />
+        <p>{errors.email}</p>
       </div>
       <div>
         <input
@@ -65,8 +57,8 @@ function SignupForm() {
           placeholder="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          required
         />
+        <p>{errors.username}</p>
       </div>
       <div>
         <input
@@ -74,8 +66,8 @@ function SignupForm() {
           placeholder="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required
         />
+        <p>{errors.password}</p>
       </div>
       <div>
         <input
@@ -83,8 +75,8 @@ function SignupForm() {
           placeholder="confirmPassword"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          required
         />
+        <p>{errors.confirmPassword}</p>
       </div>
       <button type="submit">Sign Up</button>
     </form>

@@ -31,7 +31,7 @@ function LoginForm() {
             placeholder="username or email"
             onChange={(e) => setCredential(e.target.value)}
           />
-          {errors.credential && <p>{errors.credential}</p>}
+          <p>{errors.credential}</p>
         </div>
         <div>
           <input
@@ -40,7 +40,7 @@ function LoginForm() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          {errors.password && <p>{errors.password}</p>}
+          <p>{errors.password}</p>
         </div>
         <button type="submit">Log In</button>
       </form>

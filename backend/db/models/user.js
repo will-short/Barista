@@ -91,6 +91,16 @@ module.exports = (sequelize, DataTypes) => {
     });
     return await User.scope("currentUser").findByPk(user.id);
   };
+  User.exists = async function (username, email) {
+    const usernameExists = await User.scope("loginUser").findOne({
+      where: { username },
+    });
+    const emailExists = await User.scope("loginUser").findOne({
+      where: { email },
+    });
+
+    return { usernameExists, emailExists };
+  };
 
   return User;
 };
