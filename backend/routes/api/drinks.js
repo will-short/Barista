@@ -11,9 +11,7 @@ const router = express.Router();
 router.get(
   "/test-route",
   asyncHandler(async (req, res) => {
-    let drinks = await Drink.findAll({
-      include: Ingredient,
-    });
+    let drinks = await Drink.all();
     res.json(drinks);
   })
 );

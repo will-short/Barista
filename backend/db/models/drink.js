@@ -6,11 +6,20 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       description: DataTypes.STRING,
       ingredients: DataTypes.INTEGER,
+      image: DataTypes.STRING,
     },
     {}
   );
   Drink.associate = function (models) {
-    Drink.belongsToMany(models.Checkin);
+    Drink.hasMany(models.Checkin, {
+      foreignKey: "drink_id",
+    });
+  };
+
+  Drink.all = async function () {
+    const allDrinks = await Drink.findAll();
+
+    return allDrinks;
   };
   return Drink;
 };
