@@ -58,8 +58,8 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.prototype.toSafeObject = function () {
-    const { id, username, email, name } = this; // context will be the User instance
-    return { id, username, email, name };
+    const { id, username, email, name, profile_image, location } = this; // context will be the User instance
+    return { id, username, email, name, profile_image, location };
   };
   User.prototype.validatePassword = function (password) {
     return bcrypt.compareSync(password, this.hashed_password.toString());
@@ -81,15 +81,34 @@ module.exports = (sequelize, DataTypes) => {
       return await User.scope("currentUser").findByPk(user.id);
     }
   };
-  User.signup = async function ({ username, email, password, name }) {
+  User.signup = async function ({
+    username,
+    email,
+    password,
+    name,
+    profile_image,
+    location,
+  }) {
     const hashed_password = bcrypt.hashSync(password);
     const user = await User.create({
       name,
       username,
       email,
+      profile_image,
+      location,
       hashed_password,
     });
     return await User.scope("currentUser").findByPk(user.id);
+  };
+  User.exists = async function (username, email) {
+    const usernameExists = await User.scope("loginUser").findOne({
+      where: { username },
+    });
+    const emailExists = await User.scope("loginUser").findOne({
+      where: { email },
+    });
+
+    return { usernameExists, emailExists };
   };
 
   return User;

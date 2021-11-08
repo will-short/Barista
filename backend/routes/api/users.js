@@ -9,6 +9,9 @@ const { handleValidationErrors } = require("../../utils/validation");
 const router = express.Router();
 
 const validateSignup = [
+  check("name")
+    .exists({ checkFalsy: true })
+    .withMessage("Please provide a name."),
   check("email")
     .exists({ checkFalsy: true })
     .isEmail()
@@ -21,7 +24,11 @@ const validateSignup = [
   check("password")
     .exists({ checkFalsy: true })
     .isLength({ min: 6 })
-    .withMessage("Password must be 6 characters or more."),
+    .withMessage("Password must be 6 characters or more.")
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/, "g")
+    .withMessage(
+      'Password must contain at least 1 lowercase letter, uppercase letter, number, and special character (i.e. "!@#$%^&*")'
+    ),
   handleValidationErrors,
 ];
 
@@ -29,15 +36,25 @@ const validateSignup = [
 router.post(
   "/",
   validateSignup,
-  asyncHandler(async (req, res) => {
-    const { name, email, password, username } = req.body;
-    const user = await User.signup({ name, email, username, password });
+  asyncHandler(async (req, res, next) => {
+    console.log("????????????????????????????????", req.body);
+    const exists = await User.exists(req.body.username, req.body.email);
+    if (!exists.usernameExists && !exists.emailExists) {
+      const user = await User.signup(req.body);
 
-    await setTokenCookie(res, user);
-
-    return res.json({
-      user,
-    });
+      await setTokenCookie(res, user);
+      console.log(user);
+      return res.json({
+        user,
+      });
+    }
+    const err = Error("Bad request.");
+    err.errors = exists.usernameExists
+      ? { username: "username already exists" }
+      : { email: "email already exists" };
+    err.status = 400;
+    err.title = "Bad request.";
+    next(err);
   })
 );
 
