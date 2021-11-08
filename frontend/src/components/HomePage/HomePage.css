@@ -1,0 +1,41 @@
+main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-column-gap: 100px;
+  height: calc(100vh - 76px);
+  width: 70vw;
+  margin: 0 15vw 0 15vw;
+}
+aside {
+  display: grid;
+  grid-row-gap: 50px;
+  margin-top: 75px;
+}
+article {
+  height: 200px;
+  width: calc(100% - 20px);
+  border-radius: 15px;
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+}
+
+h3 {
+  margin: 0;
+  text-align: center;
+  margin-top: 15px;
+}
+h2 {
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+.checkin-feed {
+  margin-top: 50px;
+}
+.checkin-feed > h2 {
+  margin: 0;
+  text-align: center;
+  width: 100%;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+}

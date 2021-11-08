@@ -1,0 +1,32 @@
+.user-image {
+  height: 60px;
+}
+
+.user-image > img {
+  height: 60px;
+  width: 60px;
+}
+
+h2 {
+  margin: 0;
+  margin-left: 3px;
+  color: black;
+}
+.sb_user {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+.info {
+  margin-left: 10px;
+  color: grey;
+}
+.info > div {
+  display: flex;
+  align-items: center;
+}
+.info > div > i {
+  color: grey;
+  margin-right: 5px;
+}
