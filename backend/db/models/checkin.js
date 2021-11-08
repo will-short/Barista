@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Checkin.associate = function (models) {
-    // associations can be defined here
+    Checkin.hasOne(model.Drink);
   };
   return Checkin;
 };
