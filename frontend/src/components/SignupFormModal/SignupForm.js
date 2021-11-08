@@ -13,17 +13,27 @@ function SignupForm() {
   const [password, setPassword] = useState("");
   const [location, setLocation] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [imgUrl, setImgUrl] = useState(
+  const [profile_image, setProfile_image] = useState(
     "https://res.cloudinary.com/dc9htgupc/image/upload/v1636321298/y7ig5h9stnxi2zcjrix4.png"
   );
   const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (password === confirmPassword) {
       setErrors({});
+      console.log(profile_image);
+      console.log(location);
       return dispatch(
-        sessionActions.signup({ name, email, username, password })
+        sessionActions.signup({
+          name,
+          email,
+          username,
+          password,
+          profile_image,
+          location,
+        })
       ).catch(async (res) => {
         const data = await res.json();
         if (data && data.errors) setErrors(data.errors);
@@ -46,8 +56,7 @@ function SignupForm() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.url);
-        setImgUrl(data.url);
+        setProfile_image(data.url);
       })
       .catch((err) => console.log(err));
   };
@@ -56,14 +65,14 @@ function SignupForm() {
     <form onSubmit={handleSubmit}>
       <img className="logo" src={logo} alt="" />
       <div className="img-container">
-        <img src={imgUrl} />
+        <img src={profile_image} />
         <input
           type="file"
           onChange={(e) => uploadImage(e.target.files[0])}
           id="img"
           style={{ display: "none" }}
         ></input>
-        <label for="img">Upload Profile Pic</label>
+        <label htmlFor="img">Upload Profile Pic</label>
       </div>
       <div>
         <input

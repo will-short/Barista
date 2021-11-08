@@ -37,21 +37,13 @@ router.post(
   "/",
   validateSignup,
   asyncHandler(async (req, res, next) => {
-    const { name, email, password, username, profile_image, location } =
-      req.body;
-    const exists = await User.exists(username, email);
+    console.log("????????????????????????????????", req.body);
+    const exists = await User.exists(req.body.username, req.body.email);
     if (!exists.usernameExists && !exists.emailExists) {
-      const user = await User.signup({
-        name,
-        email,
-        username,
-        password,
-        profile_image,
-        location,
-      });
+      const user = await User.signup(req.body);
 
       await setTokenCookie(res, user);
-
+      console.log(user);
       return res.json({
         user,
       });
