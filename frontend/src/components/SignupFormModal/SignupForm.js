@@ -23,8 +23,6 @@ function SignupForm() {
 
     if (password === confirmPassword) {
       setErrors({});
-      console.log(profile_image);
-      console.log(location);
       return dispatch(
         sessionActions.signup({
           name,
