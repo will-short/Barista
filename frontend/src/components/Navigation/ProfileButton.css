@@ -1,8 +1,8 @@
 button.profile {
-  width: fit-content;
-  height: fit-content;
+  width: 52px;
+  height: 52px;
   background: none;
-  margin-top: 20px;
+  margin-top: 17px;
 }
 button.profile > * {
   height: 40px;

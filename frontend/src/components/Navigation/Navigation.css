@@ -10,7 +10,7 @@ nav {
 }
 nav > div {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
 }
 div.userAuth {
@@ -30,7 +30,7 @@ a#home {
 
 button.user {
   background: none;
-  color: inherit;
+  color: rgb(38, 38, 38);
   border: none;
   padding: 0;
   font: inherit;
@@ -45,14 +45,14 @@ img {
 }
 input#searchBar {
   margin-top: 10px;
-  height: fit-content;
+  height: 30px;
 }
 div.search {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 600px;
-  top: 0px;
+  width: 233px;
+  height: 75px;
 }
 .drinks-list {
   top: 60px;

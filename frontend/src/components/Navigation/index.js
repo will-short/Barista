@@ -76,7 +76,14 @@ function Navigation({ isLoaded }) {
             <div className="drinks-list" onBlur={(e) => console.log()}>
               {drinks.map(({ name, image, id }) => {
                 if (name.toLowerCase().startsWith(search) || !search)
-                  return <DrinkModal key={id} name={name} image={image} />;
+                  return (
+                    <DrinkModal
+                      key={id}
+                      name={name}
+                      image={image}
+                      drinkId={id}
+                    />
+                  );
               })}
             </div>
           )}
@@ -92,7 +99,8 @@ document.addEventListener("mousedown", (event) => {
   ) {
     searchDiv.lastChild.style.display = "block";
   } else {
-    searchDiv.lastChild.style.display = "none";
+    let drinkList = document.querySelector(".drinks-list");
+    drinkList && (drinkList.style.display = "none");
   }
 });
 export default Navigation;
