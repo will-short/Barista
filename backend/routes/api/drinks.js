@@ -9,7 +9,7 @@ const { handleValidationErrors } = require("../../utils/validation");
 const router = express.Router();
 
 router.get(
-  "/test-route",
+  "/",
   asyncHandler(async (req, res) => {
     let drinks = await Drink.all();
     res.json(drinks);
