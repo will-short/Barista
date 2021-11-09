@@ -6,9 +6,11 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import * as sessionActions from "../../store/session";
 import { getAllDrinks } from "../../store/drinks";
-
+import DrinkModal from "../DrinkModal";
 import "./Navigation.css";
 import logo from "../../images/Barista-logo-text.png";
+
+let searchDiv;
 function Navigation({ isLoaded }) {
   const dispatch = useDispatch();
   const drinks = useSelector((state) => state.drinks.drinks);
@@ -40,13 +42,20 @@ function Navigation({ isLoaded }) {
     );
   }
 
-  function drinkList() {
-    if (!drinks.length) dispatch(getAllDrinks());
-    setHideList(true);
+  function drinkList(e) {
+    if (!drinks.length) {
+      dispatch(getAllDrinks());
+      setHideList(true);
+      return;
+    }
+    console.log(e.target.nextElementSibling);
+    e.target.nextElementSibling.style.display = "block";
   }
   function filter(e) {
     setSearch(e.target.value.toLowerCase());
   }
+  searchDiv = document.querySelector(".search");
+
   useEffect(() => {}, [hideList]);
   return (
     <nav>
@@ -61,19 +70,13 @@ function Navigation({ isLoaded }) {
             placeholder="Find a Drink or Location"
             id="searchBar"
             onFocus={drinkList}
-            onBlur={() => setHideList(false)}
             onChange={filter}
           />
           {hideList && (
-            <div className="drinks-list">
+            <div className="drinks-list" onBlur={(e) => console.log()}>
               {drinks.map(({ name, image, id }) => {
                 if (name.toLowerCase().startsWith(search) || !search)
-                  return (
-                    <button key={id}>
-                      <img src={image} alt="" />
-                      <div>{name}</div>
-                    </button>
-                  );
+                  return <DrinkModal key={id} name={name} image={image} />;
               })}
             </div>
           )}
@@ -82,5 +85,14 @@ function Navigation({ isLoaded }) {
     </nav>
   );
 }
-
+document.addEventListener("mousedown", (event) => {
+  if (
+    searchDiv.lastChild.contains(event.target) ||
+    searchDiv.firstChild.contains(event.target)
+  ) {
+    searchDiv.lastChild.style.display = "block";
+  } else {
+    searchDiv.lastChild.style.display = "none";
+  }
+});
 export default Navigation;

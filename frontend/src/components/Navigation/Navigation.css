@@ -45,10 +45,14 @@ img {
 }
 input#searchBar {
   margin-top: 10px;
+  height: fit-content;
 }
 div.search {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  height: 600px;
+  top: 0px;
 }
 .drinks-list {
   top: 60px;
