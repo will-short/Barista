@@ -8,7 +8,12 @@ nav {
   border-bottom: 1px solid rgba(128, 128, 128, 0.5);
   color: rgb(38, 38, 38);
 }
-nav > * {
+nav > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+div.userAuth {
   display: flex;
   align-items: flex-start;
   justify-content: space-around;
@@ -25,7 +30,7 @@ a#home {
 
 button.user {
   background: none;
-  color: inherit;
+  color: rgb(38, 38, 38);
   border: none;
   padding: 0;
   font: inherit;
@@ -37,4 +42,65 @@ button.user {
 }
 img {
   height: 100%;
+}
+input#searchBar {
+  margin-top: 10px;
+  height: 30px;
+}
+div.search {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 233px;
+  height: 75px;
+}
+.drinks-list {
+  top: 60px;
+  position: absolute;
+  height: 400px;
+  overflow-y: scroll;
+  width: 230px;
+  background-color: white;
+  box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.2);
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.drinks-list > button {
+  background: transparent;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  height: 60px;
+}
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  width: 5px;
+}
+
+button:hover {
+  background-color: rgb(233, 233, 233);
+}
+.drinks-list > button > div {
+  color: black;
+  font-size: 15px;
+  margin-left: 7.5px;
+}
+.drinks-list > button > img {
+  height: 50px;
+  width: 50px;
 }

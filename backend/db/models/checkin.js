@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     {}
   );
   Checkin.associate = function (models) {
-    // associations can be defined here
+    Checkin.belongsTo(models.Drink, { foreignKey: "drink_id" });
   };
   return Checkin;
 };
