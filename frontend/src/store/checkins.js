@@ -1,0 +1,25 @@
+import { csrfFetch } from "../store/csrf";
+
+const LOADCHECKINS = "drinks/LOADCHECKINS";
+
+const load = (checkins) => ({
+  type: LOADCHECKINS,
+  checkins,
+});
+
+export const getAllCheckins = () => async (dispatch) => {
+  const response = await csrfFetch("/api/checkins");
+  const checkins = await response.json();
+
+  dispatch(load(checkins));
+  return checkins;
+};
+
+export default function checkinsReducer(state = { checkins: [] }, action) {
+  switch (action.type) {
+    case LOADCHECKINS:
+      return { ...state, checkins: [...action.checkins] };
+    default:
+      return state;
+  }
+}

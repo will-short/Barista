@@ -48,7 +48,6 @@ function Navigation({ isLoaded }) {
       setHideList(true);
       return;
     }
-    console.log(e.target.nextElementSibling);
     e.target.nextElementSibling.style.display = "block";
   }
   function filter(e) {
@@ -73,9 +72,9 @@ function Navigation({ isLoaded }) {
             onChange={filter}
           />
           {hideList && (
-            <div className="drinks-list" onBlur={(e) => console.log()}>
+            <div className="drinks-list">
               {drinks.map(({ name, image, id }) => {
-                if (name.toLowerCase().startsWith(search) || !search)
+                if (name?.toLowerCase().startsWith(search) || !search)
                   return (
                     <DrinkModal
                       key={id}

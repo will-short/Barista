@@ -5,6 +5,7 @@ import "./UserInfo.css";
 export default function UserInfo() {
   const defaultProfileImg =
     "https://res.cloudinary.com/dc9htgupc/image/upload/v1636321298/y7ig5h9stnxi2zcjrix4.png";
+
   const sessionUser = useSelector((state) => state.session.user);
   let { name, profile_image, username, location } = sessionUser;
   return (

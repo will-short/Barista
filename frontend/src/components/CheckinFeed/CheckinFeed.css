@@ -1,0 +1,43 @@
+.checkinFeedContainer {
+  width: 100%;
+}
+.checkinFeedContainer > ul {
+  width: 100%;
+  list-style-type: none;
+  margin: 0px;
+  padding-inline-start: 0px;
+}
+.checkinImage {
+  width: 100%;
+}
+.profileImage {
+  height: 50px;
+  border-radius: 50%;
+}
+li:hover {
+  background-color: white;
+}
+li {
+  background-color: white;
+}
+.top {
+  display: flex;
+  height: 70px;
+  align-items: center;
+  justify-content: flex-start;
+}
+.top > h3 {
+  margin: 0;
+  margin-left: 10px;
+  display: flex;
+  justify-content: space-around;
+}
+.top > h3 > span {
+  margin-left: 5px;
+  margin-right: 5px;
+  font-weight: normal;
+}
+.starRating {
+  margin-left: 200px;
+  color: gold;
+}
