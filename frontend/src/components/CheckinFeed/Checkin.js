@@ -18,14 +18,14 @@ export default function Checkin({ data }) {
     Drink,
     User,
   } = data;
-
+  console.log(description);
+  const [updateDisc, setUpdateDisc] = useState();
   const dispatch = useDispatch();
-  const [updateDisc, setUpdateDisc] = useState(description);
   const defaultProfileImg =
     "https://res.cloudinary.com/dc9htgupc/image/upload/v1636321298/y7ig5h9stnxi2zcjrix4.png";
   const sessionUser = useSelector((state) => state.session.user);
-  function deleteCheckinAction(id) {
-    dispatch(deleteCheckin(id));
+  async function deleteCheckinAction(id) {
+    await dispatch(deleteCheckin(id));
   }
   function updateCheckin(update) {
     dispatch(editCheckin(id, update));
@@ -44,9 +44,8 @@ export default function Checkin({ data }) {
     }
     return stars;
   }
-
   return (
-    <li key={id}>
+    <li>
       <div className="top">
         <img
           src={User?.profile_image ? User?.profile_image : defaultProfileImg}
@@ -68,7 +67,7 @@ export default function Checkin({ data }) {
               type="text"
               name="description"
               id="descriptionfield"
-              value={updateDisc}
+              value={updateDisc || description}
               onChange={(e) => setUpdateDisc(e.target.value)}
             />
             {description !== updateDisc && (

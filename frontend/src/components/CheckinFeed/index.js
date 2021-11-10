@@ -32,6 +32,7 @@ export default function CheckinFeed() {
               User,
             }) => (
               <Checkin
+                key={id}
                 data={{
                   description,
                   drink_id,
