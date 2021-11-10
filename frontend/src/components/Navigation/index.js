@@ -11,6 +11,7 @@ import "./Navigation.css";
 import logo from "../../images/Barista-logo-text.png";
 
 let searchDiv;
+
 function Navigation({ isLoaded }) {
   const dispatch = useDispatch();
   const drinks = useSelector((state) => state.drinks.drinks);
@@ -41,20 +42,18 @@ function Navigation({ isLoaded }) {
       </div>
     );
   }
-
+  searchDiv = document.querySelector(".search");
   function drinkList(e) {
     if (!drinks.length) {
       dispatch(getAllDrinks());
       setHideList(true);
       return;
     }
-    console.log(e.target.nextElementSibling);
     e.target.nextElementSibling.style.display = "block";
   }
   function filter(e) {
     setSearch(e.target.value.toLowerCase());
   }
-  searchDiv = document.querySelector(".search");
 
   useEffect(() => {}, [hideList]);
   return (
@@ -73,9 +72,9 @@ function Navigation({ isLoaded }) {
             onChange={filter}
           />
           {hideList && (
-            <div className="drinks-list" onBlur={(e) => console.log()}>
+            <div className="drinks-list">
               {drinks.map(({ name, image, id }) => {
-                if (name.toLowerCase().startsWith(search) || !search)
+                if (name?.toLowerCase().startsWith(search) || !search)
                   return (
                     <DrinkModal
                       key={id}

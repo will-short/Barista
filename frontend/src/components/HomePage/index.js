@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as sessionActions from "../../store/session";
 import "./HomePage.css";
 import UserInfo from "./UserInfo";
+import CheckinFeed from "../CheckinFeed";
+
 export default function HomePage() {
   const sessionUser = useSelector((state) => state.session.user);
   let sideBar;
@@ -23,6 +24,7 @@ export default function HomePage() {
     <main>
       <div className="checkin-feed">
         <h2>Recent Activity</h2>
+        <CheckinFeed />
       </div>
       <aside>{sideBar}</aside>
     </main>
