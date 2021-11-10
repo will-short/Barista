@@ -80,6 +80,7 @@ input[type="radio"] {
 }
 .deleteButton {
   margin-top: 10px;
+  color: red;
 }
 .deleteButton:hover,
 .update:hover {
@@ -87,5 +88,14 @@ input[type="radio"] {
   color: black;
 }
 #descriptionfield {
-  width: 70%;
+  width: fit-content;
+  max-width: 70%;
+}
+#descriptionDiv {
+  margin-top: 5px;
+  font-size: 20px;
+}
+#commentContainer {
+  width: 100%;
+  display: grid;
 }

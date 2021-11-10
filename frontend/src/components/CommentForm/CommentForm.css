@@ -1,0 +1,18 @@
+#commentForm {
+  display: grid;
+  place-items: center;
+}
+form > #commentText {
+  width: 70%;
+}
+form > #commentText > textarea {
+  height: 100%;
+  width: 100%;
+}
+#commentForm > h3 {
+  cursor: pointer;
+}
+#commentSubmit {
+  height: 30px;
+  margin: 20px;
+}

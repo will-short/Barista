@@ -5,6 +5,9 @@ import {
   deleteCheckin,
   editCheckin,
 } from "../../store/checkins";
+import CommentForm from "../CommentForm";
+
+let comments = ["test comment1", "test comment2", "test comment3"];
 
 export default function Checkin({ data }) {
   let {
@@ -19,7 +22,7 @@ export default function Checkin({ data }) {
     User,
   } = data;
   console.log(description);
-  const [updateDisc, setUpdateDisc] = useState();
+  const [updateDisc, setUpdateDisc] = useState(description);
   const dispatch = useDispatch();
   const defaultProfileImg =
     "https://res.cloudinary.com/dc9htgupc/image/upload/v1636321298/y7ig5h9stnxi2zcjrix4.png";
@@ -80,7 +83,7 @@ export default function Checkin({ data }) {
             )}
           </div>
         ) : (
-          <div>{description}</div>
+          <div id="descriptionDiv">{description}</div>
         )}
         <div>
           {sessionUser?.id === owner_id && (
@@ -93,6 +96,12 @@ export default function Checkin({ data }) {
           )}
         </div>
       </div>
+      <div id="commentContainer">
+        {comments.map((comment) => (
+          <span>{comment}</span>
+        ))}
+      </div>
+      <CommentForm />
     </li>
   );
 }
