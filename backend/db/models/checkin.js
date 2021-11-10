@@ -44,9 +44,9 @@ module.exports = (sequelize, DataTypes) => {
 
     return checkins;
   };
-  Checkin.update = async function (id, updateValue) {
+  Checkin.update = async function (updateValue, id) {
     let checkin = await Checkin.findByPk(id);
-    await Project.update(updateValue, { where: { id } });
+    await checkin.update({ description: updateValue });
 
     return checkin;
   };

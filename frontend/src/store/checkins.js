@@ -23,6 +23,16 @@ export const deleteCheckin = (id) => async (dispatch) => {
   dispatch(load(checkins));
   return checkins;
 };
+export const editCheckin = (id, update) => async (dispatch) => {
+  const response = await csrfFetch(`/api/checkins/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({ update }),
+  });
+  const checkins = await response.json();
+
+  dispatch(load(checkins));
+  return checkins;
+};
 
 export const getAllCheckins = () => async (dispatch) => {
   const response = await csrfFetch("/api/checkins");

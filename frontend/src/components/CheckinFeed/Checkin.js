@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllCheckins, deleteCheckin } from "../../store/checkins";
+import {
+  getAllCheckins,
+  deleteCheckin,
+  editCheckin,
+} from "../../store/checkins";
 
 export default function Checkin({ data }) {
   let {
@@ -23,7 +27,10 @@ export default function Checkin({ data }) {
   function deleteCheckinAction(id) {
     dispatch(deleteCheckin(id));
   }
-
+  function updateCheckin(update) {
+    dispatch(editCheckin(id, update));
+  }
+  const checkins = useSelector((state) => state.checkins.checkins);
   function stars(rating) {
     let stars = [];
     for (let i = 0; i < 5; i++) {
@@ -65,7 +72,12 @@ export default function Checkin({ data }) {
               onChange={(e) => setUpdateDisc(e.target.value)}
             />
             {description !== updateDisc && (
-              <button className="update">update</button>
+              <button
+                className="update"
+                onClick={(e) => updateCheckin(updateDisc)}
+              >
+                update
+              </button>
             )}
           </div>
         ) : (

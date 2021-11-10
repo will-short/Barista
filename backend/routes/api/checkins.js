@@ -35,9 +35,11 @@ router.get(
 router.put(
   "/:checkinid",
   asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.checkinid, 10);
     let { update } = req.body;
-    let checkin = await Checkin.update(checkinid, update);
-    res.json(checkin);
+    let checkin = await Checkin.update(update, id);
+    const checkins = await Checkin.all(Drink, User);
+    res.json(checkins);
   })
 );
 router.delete(
