@@ -7,6 +7,14 @@ const load = (checkins) => ({
   checkins,
 });
 
+export const postCheckin = (checkin) => async (dispatch) => {
+  const response = await csrfFetch("/api/checkins", {
+    method: "POST",
+    body: JSON.stringify(checkin),
+  });
+  dispatch(load([]));
+};
+
 export const getAllCheckins = () => async (dispatch) => {
   const response = await csrfFetch("/api/checkins");
   const checkins = await response.json();

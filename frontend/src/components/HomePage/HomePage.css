@@ -2,7 +2,7 @@ main {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-column-gap: 100px;
-  height: calc(100vh - 76px);
+  height: calc(100vh - 150px);
   width: 70vw;
   margin: 0 15vw 0 15vw;
 }
@@ -10,6 +10,7 @@ aside {
   display: grid;
   grid-row-gap: 50px;
   margin-top: 75px;
+  height: 60vh;
 }
 article {
   height: 200px;
@@ -32,6 +33,7 @@ h2 {
 .checkin-feed {
   margin-top: 50px;
   width: 40vw;
+  height: 80%;
 }
 .checkin-feed > h2 {
   margin: 0;

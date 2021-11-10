@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { Modal } from "../../context/Modal";
-import Drink from "./Drink";
+import CheckinForm from "./CheckinForm";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function DrinkModal({ image, name, drinkId }) {
+export default function CheckinFormModal({ drinkId, ownerId }) {
   const [showModal, setShowModal] = useState(false);
   const searchDiv = document.querySelector(".search");
 
@@ -15,12 +15,11 @@ export default function DrinkModal({ image, name, drinkId }) {
           searchDiv.lastChild.style.display = "none";
         }}
       >
-        <img src={image} alt="" />
-        <div>{name}</div>
+        Checkin
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          {<Drink drinkId={drinkId} />}
+          {<CheckinForm drinkId={drinkId} ownerId={ownerId} />}
         </Modal>
       )}
     </>

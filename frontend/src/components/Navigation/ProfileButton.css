@@ -74,6 +74,7 @@ button#logout {
 .profile-dropdown > li {
   width: 100%;
   background-color: white;
+  box-shadow: none;
 }
 .profile-dropdown > li:hover {
   background-color: rgb(233, 233, 233);

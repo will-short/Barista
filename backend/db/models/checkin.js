@@ -14,9 +14,10 @@ module.exports = (sequelize, DataTypes) => {
   );
   Checkin.associate = function (models) {
     Checkin.belongsTo(models.Drink, { foreignKey: "drink_id" });
+    Checkin.belongsTo(models.User, { foreignKey: "owner_id" });
   };
-  Checkin.all = async function (Drink) {
-    const checkins = await Checkin.findAll({ include: Drink });
+  Checkin.all = async function (Drink, User) {
+    const checkins = await Checkin.findAll({ include: [Drink, User] });
 
     return checkins;
   };
@@ -46,6 +47,11 @@ module.exports = (sequelize, DataTypes) => {
     await Project.update(updateValue, { where: { id } });
 
     return checkin;
+  };
+  Checkin.makeNewCheckin = async function (data) {
+    const newCheckin = await Checkin.create(data);
+
+    return newCheckin;
   };
   return Checkin;
 };

@@ -46,20 +46,21 @@ export default function Navigation() {
               owner_id,
               id,
               Drink,
+              User,
             }) => (
               <li key={id}>
                 <div className="top">
                   <img
                     src={
-                      sessionUser.profile_image
-                        ? sessionUser.profile_image
+                      User?.profile_image
+                        ? User?.profile_image
                         : defaultProfileImg
                     }
                     alt=""
                     className="profileImage"
                   />
                   <h3>
-                    {sessionUser.name ? sessionUser.name : sessionUser.username}
+                    {User?.name ? User?.name : User?.username}
                     <span>is drinking a</span>
                     {Drink?.name}
                   </h3>

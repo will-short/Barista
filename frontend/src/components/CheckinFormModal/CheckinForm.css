@@ -1,0 +1,18 @@
+div.img-container > .checkinImage {
+  border-radius: 0px;
+  width: 400px;
+  height: auto;
+}
+.inputs {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+input[type="number"] {
+  width: 150px;
+}
+form > button:hover {
+  background-color: dodgerblue;
+}
