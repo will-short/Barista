@@ -40,6 +40,15 @@ router.put(
     res.json(checkin);
   })
 );
+router.delete(
+  "/:checkinid",
+  asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.checkinid, 10);
+    await Checkin.delete(id);
+    const checkins = await Checkin.all(Drink, User);
+    res.json(checkins);
+  })
+);
 router.post(
   "/",
   asyncHandler(async (req, res) => {

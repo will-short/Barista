@@ -17,8 +17,10 @@ module.exports = (sequelize, DataTypes) => {
     Checkin.belongsTo(models.User, { foreignKey: "owner_id" });
   };
   Checkin.all = async function (Drink, User) {
-    const checkins = await Checkin.findAll({ include: [Drink, User] });
-
+    const checkins = await Checkin.findAll({
+      include: [Drink, User],
+      order: [["createdAt", "DESC"]],
+    });
     return checkins;
   };
   Checkin.userCheckins = async function (owner_id) {
@@ -47,6 +49,10 @@ module.exports = (sequelize, DataTypes) => {
     await Project.update(updateValue, { where: { id } });
 
     return checkin;
+  };
+  Checkin.delete = async function (id) {
+    let checkin = await Checkin.findByPk(id);
+    await checkin.destroy();
   };
   Checkin.makeNewCheckin = async function (data) {
     const newCheckin = await Checkin.create(data);

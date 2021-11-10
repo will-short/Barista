@@ -14,6 +14,15 @@ export const postCheckin = (checkin) => async (dispatch) => {
   });
   dispatch(load([]));
 };
+export const deleteCheckin = (id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/checkins/${id}`, {
+    method: "DELETE",
+  });
+  const checkins = await response.json();
+
+  dispatch(load(checkins));
+  return checkins;
+};
 
 export const getAllCheckins = () => async (dispatch) => {
   const response = await csrfFetch("/api/checkins");

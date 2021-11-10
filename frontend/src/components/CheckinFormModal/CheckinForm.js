@@ -4,14 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { postCheckin } from "../../store/checkins";
 import "./CheckinForm.css";
 
-export default function CheckinForm({ drinkId, ownerId }) {
+export default function CheckinForm({ drinkId, ownerId, drinkImg }) {
   const dispatch = useDispatch();
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState({});
-  const [image, setImage] = useState(
-    "https://www.nasa.gov/sites/default/files/thumbnails/image/2008_m87_labeled.jpg"
-  );
+  const [image, setImage] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -44,34 +42,43 @@ export default function CheckinForm({ drinkId, ownerId }) {
     <>
       <h1>Create Checkin</h1>
       <form onSubmit={handleSubmit}>
-        <div className="img-container">
-          <img src={image} className="checkinImage" />
-          <input
-            type="file"
-            onChange={(e) => uploadImage(e.target.files[0])}
-            id="img"
-            style={{ display: "none" }}
-          ></input>
-          <label htmlFor="img">Upload Profile Pic</label>
-        </div>
-        <div className="inputs">
+        <div className="checkinFormHeader">
           <div>
-            <input
-              type="number"
-              value={rating ? rating : "enter rating"}
-              placeholder="enter rating"
-              onChange={(e) => setRating(e.target.value)}
-            />
-            <p>{errors.credential}</p>
-          </div>
-          <div>
-            <input
-              type="text"
+            <textarea
               placeholder="caption"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />
             <p>{errors.password}</p>
+          </div>
+          <div className="img-container">
+            <input
+              type="file"
+              onChange={(e) => uploadImage(e.target.files[0])}
+              id="img"
+              style={{ display: "none" }}
+            ></input>
+            <label htmlFor="img">
+              {image ? (
+                <img src={image} alt="" />
+              ) : (
+                <span class="material-icons-outlined">add_a_photo</span>
+              )}
+            </label>
+          </div>
+        </div>
+        <div className="inputs">
+          <div>
+            <label htmlFor="rating">{rating} Stars</label>
+            <input
+              type="range"
+              min="0"
+              max="10"
+              id="rating"
+              placeholder="enter rating"
+              onChange={(e) => setRating(+e.target.value / 2)}
+            />
+            <p>{errors.credential}</p>
           </div>
         </div>
         <button type="submit">Create Checkin</button>

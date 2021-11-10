@@ -29,7 +29,11 @@ export default function Drink({ drinkId }) {
       </section>
       <footer>
         {sessionUser && (
-          <CheckinFormModal drinkId={drinkId} ownerId={sessionUser?.id} />
+          <CheckinFormModal
+            drinkId={drinkId}
+            ownerId={sessionUser?.id}
+            drinkImg={image}
+          />
         )}
       </footer>
     </article>
