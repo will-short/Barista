@@ -6,47 +6,55 @@ import Checkin from "./Checkin";
 
 export default function CheckinFeed() {
   const dispatch = useDispatch();
-  const checkins = useSelector((state) => state.checkins.checkins);
+  const checkins = useSelector((state) => state.checkins);
 
-  if (!checkins.length) dispatch(getAllCheckins());
+  if (JSON.stringify(checkins) === "{}") dispatch(getAllCheckins());
   return (
     <div className="checkinFeedContainer">
       <div className="checkinHeader">
-        <input type="radio" name="header" id="all" />
-        <label htmlFor="all">Latest Checkins</label>
-        <input type="radio" name="header" id="yours" />
-        <label htmlFor="yours">Your Checkins</label>
+        <label htmlFor="all">
+          <input type="radio" name="header" id="all" />
+          <span>Latest Checkins</span>
+        </label>
+        <label htmlFor="yours">
+          <input type="radio" name="header" id="yours" checked />
+          <span>Your Checkins</span>
+        </label>
       </div>
       <ul>
-        {checkins.length &&
-          checkins.map(
-            ({
-              description,
-              drink_id,
-              image,
-              location_id,
-              rating,
-              owner_id,
-              id,
-              Drink,
-              User,
-            }) => (
-              <Checkin
-                key={id}
-                data={{
-                  description,
-                  drink_id,
-                  image,
-                  location_id,
-                  rating,
-                  owner_id,
-                  id,
-                  Drink,
-                  User,
-                }}
-              />
-            )
-          )}
+        {checkins &&
+          Object.values(checkins)
+            .reverse()
+            .map(
+              ({
+                description,
+                drink_id,
+                image,
+                location_id,
+                rating,
+                owner_id,
+                id,
+                Drink,
+                User,
+                Comments,
+              }) => (
+                <Checkin
+                  key={id}
+                  data={{
+                    description,
+                    drink_id,
+                    image,
+                    location_id,
+                    rating,
+                    owner_id,
+                    id,
+                    Drink,
+                    User,
+                    Comments,
+                  }}
+                />
+              )
+            )}
       </ul>
     </div>
   );

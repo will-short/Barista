@@ -15,11 +15,15 @@ module.exports = (sequelize, DataTypes) => {
   Checkin.associate = function (models) {
     Checkin.belongsTo(models.Drink, { foreignKey: "drink_id" });
     Checkin.belongsTo(models.User, { foreignKey: "owner_id" });
+    Checkin.hasMany(models.Comment, {
+      foreignKey: "checkin_id",
+      onDelete: "cascade",
+      hooks: true,
+    });
   };
-  Checkin.all = async function (Drink, User) {
+  Checkin.all = async function (Drink, User, Comment) {
     const checkins = await Checkin.findAll({
-      include: [Drink, User],
-      order: [["createdAt", "DESC"]],
+      include: [Drink, User, { model: Comment, include: User }],
     });
     return checkins;
   };
@@ -46,18 +50,22 @@ module.exports = (sequelize, DataTypes) => {
   };
   Checkin.update = async function (updateValue, id) {
     let checkin = await Checkin.findByPk(id);
-    await checkin.update({ description: updateValue });
+    let updatedCheckin = await checkin.update({ description: updateValue });
 
-    return checkin;
+    return updatedCheckin;
   };
   Checkin.delete = async function (id) {
     let checkin = await Checkin.findByPk(id);
     await checkin.destroy();
+    return checkin;
   };
-  Checkin.makeNewCheckin = async function (data) {
+  Checkin.makeNewCheckin = async function (data, Drink, User) {
     const newCheckin = await Checkin.create(data);
-
-    return newCheckin;
+    const newCheckinData = await Checkin.findOne({
+      where: { id: newCheckin.id },
+      include: [Drink, User],
+    });
+    return newCheckinData;
   };
   return Checkin;
 };

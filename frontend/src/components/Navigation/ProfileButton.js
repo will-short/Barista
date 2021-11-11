@@ -33,7 +33,6 @@ function ProfileButton({ user }) {
     e.preventDefault();
     dispatch(sessionActions.logout());
   };
-  console.log();
   return (
     <div id="position">
       <div id="profile-container">
