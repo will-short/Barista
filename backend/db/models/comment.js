@@ -30,10 +30,14 @@ module.exports = (sequelize, DataTypes) => {
     });
     return res;
   };
-  Comment.update = async function (content, id) {
+  Comment.update = async function (content, id, User) {
     let comment = await Comment.findByPk(id);
     await comment.update({ content });
-
+    return comment;
+  };
+  Comment.delete = async function (id) {
+    let comment = await Comment.findByPk(id);
+    await comment.destroy();
     return comment;
   };
   return Comment;

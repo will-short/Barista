@@ -23,7 +23,6 @@ router.post(
       },
       User
     );
-    console.log(comment);
     res.json(comment);
   })
 );
@@ -32,9 +31,16 @@ router.put(
   asyncHandler(async (req, res) => {
     const id = parseInt(req.params.commentid, 10);
     let { content } = req.body;
-    let checkin = await Comment.update(content, id);
-    const checkins = await Comment.all(Drink, User);
-    res.json(checkins);
+    let comment = await Comment.update(content, id);
+    res.json(comment);
+  })
+);
+router.delete(
+  "/:commentid",
+  asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.commentid, 10);
+    const comment = await Comment.delete(id);
+    res.json(comment);
   })
 );
 module.exports = router;

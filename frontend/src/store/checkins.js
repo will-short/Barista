@@ -4,7 +4,9 @@ const LOADCHECKINS = "checkins/LOADCHECKINS";
 const ADDCHECKIN = "checkins/ADDCHECKIN";
 const DELETECHECKIN = "checkins/DELETECHECKIN";
 const EDITCHECKIN = "checkins/EDITCHECKIN";
-const POSTCOMMENT = "checkins/POSTCOMMENT";
+const POSTCOMMENT = "comment/POSTCOMMENT";
+const DELETECOMMENT = "comment/DELETECOMMENT";
+const EDITCOMMENT = "comment/EDITCOMMENT";
 //TODO: fix everything to not just load all
 const load = (checkins) => ({
   type: LOADCHECKINS,
@@ -24,6 +26,14 @@ const edit = (checkin) => ({
 });
 const addComment = (comment) => ({
   type: POSTCOMMENT,
+  comment,
+});
+const removeComment = (comment) => ({
+  type: DELETECOMMENT,
+  comment,
+});
+const updateComment = (comment) => ({
+  type: EDITCOMMENT,
   comment,
 });
 
@@ -74,8 +84,27 @@ export const postComment = (comment) => async (dispatch) => {
   dispatch(addComment(newComment));
   return newComment;
 };
+export const deleteComment = (id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/comments/${id}`, {
+    method: "DELETE",
+  });
+  const comment = await response.json();
+  dispatch(removeComment(comment));
+  return id;
+};
+
+export const editComment = (content, id) => async (dispatch) => {
+  const response = await csrfFetch(`/api/comments/${id}`, {
+    method: "PUT",
+    body: JSON.stringify({ content }),
+  });
+  const comment = await response.json();
+  dispatch(updateComment(comment));
+  return id;
+};
 
 export default function checkinsReducer(state = {}, action) {
+  let checkin;
   switch (action.type) {
     case LOADCHECKINS:
       for (let checkin of action.checkins) {
@@ -91,9 +120,21 @@ export default function checkinsReducer(state = {}, action) {
       delete state[action.checkin.id];
       return { ...state };
     case POSTCOMMENT:
-      const checkin = state[action.comment.checkin_id];
+      checkin = state[action.comment.checkin_id];
       if (checkin.Comments) checkin.Comments.push(action.comment);
       else checkin.Comments = [action.comment];
+      return { ...state };
+    case DELETECOMMENT:
+      checkin = state[action.comment.checkin_id];
+      const index = checkin.Comments.indexOf(+action.comment.id);
+      checkin.Comments.splice(index, 1);
+      return { ...state };
+    case EDITCOMMENT:
+      checkin = state[action.comment.checkin_id];
+      const comment = checkin.Comments.find(
+        ({ id }) => id === +action.comment.id
+      );
+      comment.content = action.comment.content;
       return { ...state };
     default:
       return state;
