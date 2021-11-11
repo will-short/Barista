@@ -1,0 +1,36 @@
+"use strict";
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+    return queryInterface.bulkInsert(
+      "Comments",
+      [
+        {
+          content: "test comment 1",
+          owner_id: 1,
+          checkin_id: 1,
+        },
+        {
+          content: "test comment 2",
+          owner_id: 1,
+          checkin_id: 1,
+        },
+        {
+          content: "test comment 3",
+          owner_id: 1,
+          checkin_id: 1,
+        },
+        {
+          content: "test comment 4",
+          owner_id: 1,
+          checkin_id: 1,
+        },
+      ],
+      {}
+    );
+  },
+
+  down: (queryInterface, Sequelize) => {
+    return queryInterface.bulkDelete("Comments", null, {});
+  },
+};

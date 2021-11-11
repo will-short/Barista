@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   Checkin.associate = function (models) {
     Checkin.belongsTo(models.Drink, { foreignKey: "drink_id" });
     Checkin.belongsTo(models.User, { foreignKey: "owner_id" });
+    Checkin.hasMany(models.Comment, { foreignKey: "checkin_id" });
   };
   Checkin.all = async function (Drink, User) {
     const checkins = await Checkin.findAll({
