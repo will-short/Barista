@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteComment, editComment } from "../../store/checkins";
 import CommentForm from "../CommentForm";
-import { checkinComments } from "../../store/comments";
 import "./Comment.css";
 
 export default function Comment({ data }) {
