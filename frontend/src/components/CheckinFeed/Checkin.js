@@ -6,7 +6,6 @@ import {
   editCheckin,
 } from "../../store/checkins";
 import CommentForm from "../CommentForm";
-import { checkinComments } from "../../store/comments";
 import Comment from "../Comment";
 
 export default function Checkin({ data }) {
