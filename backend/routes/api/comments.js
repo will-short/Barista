@@ -1,6 +1,6 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
-const { User, Comment } = require("../../db/models");
+const { User, Comment, Drink } = require("../../db/models");
 
 const router = express.Router();
 router.get(
@@ -15,12 +15,26 @@ router.post(
   "/",
   asyncHandler(async (req, res) => {
     const { content, checkinId, owner_id } = req.body;
-    const comments = await Comment.makeNewComment({
-      content,
-      checkin_id: checkinId,
-      owner_id,
-    });
-    res.json(comments);
+    const comment = await Comment.makeNewComment(
+      {
+        content,
+        checkin_id: checkinId,
+        owner_id,
+      },
+      User
+    );
+    console.log(comment);
+    res.json(comment);
+  })
+);
+router.put(
+  "/:commentid",
+  asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.commentid, 10);
+    let { content } = req.body;
+    let checkin = await Comment.update(content, id);
+    const checkins = await Comment.all(Drink, User);
+    res.json(checkins);
   })
 );
 module.exports = router;

@@ -22,10 +22,19 @@ module.exports = (sequelize, DataTypes) => {
     return comments;
   };
 
-  Comment.makeNewComment = async function (data) {
-    const newCheckin = await Comment.create(data);
+  Comment.makeNewComment = async function (data, User) {
+    const newComment = await Comment.create(data);
+    const res = await Comment.findOne({
+      where: { id: newComment.id },
+      include: User,
+    });
+    return res;
+  };
+  Comment.update = async function (content, id) {
+    let comment = await Comment.findByPk(id);
+    await comment.update({ content });
 
-    return newCheckin;
+    return comment;
   };
   return Comment;
 };

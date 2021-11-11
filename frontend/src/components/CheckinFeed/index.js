@@ -6,9 +6,9 @@ import Checkin from "./Checkin";
 
 export default function CheckinFeed() {
   const dispatch = useDispatch();
-  const checkins = useSelector((state) => state.checkins.checkins);
+  const checkins = useSelector((state) => state.checkins);
 
-  if (!checkins.length) dispatch(getAllCheckins());
+  if (JSON.stringify(checkins) === "{}") dispatch(getAllCheckins());
   return (
     <div className="checkinFeedContainer">
       <div className="checkinHeader">
@@ -22,35 +22,39 @@ export default function CheckinFeed() {
         </label>
       </div>
       <ul>
-        {checkins.length &&
-          checkins.map(
-            ({
-              description,
-              drink_id,
-              image,
-              location_id,
-              rating,
-              owner_id,
-              id,
-              Drink,
-              User,
-            }) => (
-              <Checkin
-                key={id}
-                data={{
-                  description,
-                  drink_id,
-                  image,
-                  location_id,
-                  rating,
-                  owner_id,
-                  id,
-                  Drink,
-                  User,
-                }}
-              />
-            )
-          )}
+        {checkins &&
+          Object.values(checkins)
+            .reverse()
+            .map(
+              ({
+                description,
+                drink_id,
+                image,
+                location_id,
+                rating,
+                owner_id,
+                id,
+                Drink,
+                User,
+                Comments,
+              }) => (
+                <Checkin
+                  key={id}
+                  data={{
+                    description,
+                    drink_id,
+                    image,
+                    location_id,
+                    rating,
+                    owner_id,
+                    id,
+                    Drink,
+                    User,
+                    Comments,
+                  }}
+                />
+              )
+            )}
       </ul>
     </div>
   );

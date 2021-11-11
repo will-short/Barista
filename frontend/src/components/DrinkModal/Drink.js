@@ -4,11 +4,10 @@ import "./Drink.css";
 import CheckinFormModal from "../CheckinFormModal";
 
 export default function Drink({ drinkId }) {
-  const drinks = useSelector((state) => state.drinks.drinks);
+  const drinks = useSelector((state) => state.drinks);
   const currentDrink = drinks.find((drink) => drink.id === drinkId);
   const sessionUser = useSelector((state) => state.session.user);
 
-  console.log(currentDrink);
   let { name, description, image, ingredients } = currentDrink;
   return (
     <article>

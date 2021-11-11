@@ -15,10 +15,10 @@ export const getAllDrinks = () => async (dispatch) => {
   return drinks;
 };
 
-export default function drinksReducer(state = { drinks: [] }, action) {
+export default function drinksReducer(state = [], action) {
   switch (action.type) {
     case LOADDRINKS:
-      return { ...state, drinks: [...action.drinks] };
+      return [...state, ...action.drinks];
     default:
       return state;
   }

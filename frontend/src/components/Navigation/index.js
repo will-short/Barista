@@ -14,7 +14,7 @@ let searchDiv;
 
 function Navigation({ isLoaded }) {
   const dispatch = useDispatch();
-  const drinks = useSelector((state) => state.drinks.drinks);
+  const drinks = useSelector((state) => state.drinks);
   const sessionUser = useSelector((state) => state.session.user);
   const [hideList, setHideList] = useState(false);
   const [search, setSearch] = useState("");
