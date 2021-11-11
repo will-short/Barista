@@ -34,7 +34,7 @@ export default function Checkin({ data }) {
   function updateCheckin(update) {
     dispatch(editCheckin(id, update));
   }
-  const checkins = useSelector((state) => state.checkins);
+  useSelector((state) => state.checkins);
 
   function stars(rating) {
     let stars = [];
@@ -100,7 +100,7 @@ export default function Checkin({ data }) {
       </div>
       <h3 id="commentHeader">Comments</h3>
       <ul id="commentContainer">
-        {Comments?.map(({ id, content, User }) => (
+        {Comments?.reverse().map(({ id, content, User }) => (
           <Comment key={id} data={{ id, content, User }} />
         ))}
       </ul>

@@ -13,6 +13,9 @@ button.deleteComment {
   background-color: maroon;
   margin-bottom: 1%;
 }
+button.deleteComment:hover {
+  background-color: maroon;
+}
 button.updateComment {
   height: 70%;
   width: 15%;

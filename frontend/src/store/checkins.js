@@ -126,7 +126,9 @@ export default function checkinsReducer(state = {}, action) {
       return { ...state };
     case DELETECOMMENT:
       checkin = state[action.comment.checkin_id];
-      const index = checkin.Comments.indexOf(+action.comment.id);
+      const index = checkin.Comments.findIndex(
+        ({ id }) => id === action.comment.id
+      );
       checkin.Comments.splice(index, 1);
       return { ...state };
     case EDITCOMMENT:
