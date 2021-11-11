@@ -6,8 +6,7 @@ import {
   editCheckin,
 } from "../../store/checkins";
 import CommentForm from "../CommentForm";
-
-let comments = ["test comment1", "test comment2", "test comment3"];
+import { checkinComments } from "../../store/comments";
 
 export default function Checkin({ data }) {
   let {
@@ -21,7 +20,7 @@ export default function Checkin({ data }) {
     Drink,
     User,
   } = data;
-  console.log(description);
+
   const [updateDisc, setUpdateDisc] = useState(description);
   const dispatch = useDispatch();
   const defaultProfileImg =
@@ -34,6 +33,11 @@ export default function Checkin({ data }) {
     dispatch(editCheckin(id, update));
   }
   const checkins = useSelector((state) => state.checkins.checkins);
+
+  const comments = useSelector((state) => state.comments.comments);
+  if (!comments.length) dispatch(checkinComments(id));
+
+  console.log(comments);
   function stars(rating) {
     let stars = [];
     for (let i = 0; i < 5; i++) {
@@ -96,12 +100,13 @@ export default function Checkin({ data }) {
           )}
         </div>
       </div>
-      <div id="commentContainer">
+      <h3 id="commentHeader">Comments</h3>
+      <ul id="commentContainer">
         {comments.map((comment) => (
-          <span>{comment}</span>
+          <li key={comment.id}>{comment.content}</li>
         ))}
-      </div>
-      <CommentForm />
+      </ul>
+      <CommentForm checkinId={id} />
     </li>
   );
 }

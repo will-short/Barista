@@ -1,7 +1,7 @@
 import { csrfFetch } from "../store/csrf";
 
 const LOADCHECKINS = "drinks/LOADCHECKINS";
-
+//TODO: fix everything to not just load all
 const load = (checkins) => ({
   type: LOADCHECKINS,
   checkins,

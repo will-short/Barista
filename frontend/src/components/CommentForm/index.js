@@ -1,28 +1,29 @@
 import React, { useState } from "react";
 import {} from "../../store/checkins";
 import { useDispatch, useSelector } from "react-redux";
-import { postCheckin } from "../../store/checkins";
+import { postComment } from "../../store/comments";
 import "./CommentForm.css";
 
-export default function CheckinForm() {
+export default function CheckinForm({ checkinId }) {
   const dispatch = useDispatch();
-  const [rating, setRating] = useState(0);
+  const [content, setContent] = useState("");
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState({});
   const [image, setImage] = useState();
   const [showCommentForm, setShowCommentForm] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setErrors([]);
-  //   return dispatch(
-  //     postCheckin({ rating, description, drinkId, image, ownerId })
-  //   ).catch(async (res) => {
-  //     const data = await res.json();
-  //     if (data && data.errors) setErrors(data.errors);
-  //   });
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setErrors([]);
+    return dispatch(
+      postComment({ content, checkinId, owner_id: sessionUser?.id })
+    ).catch(async (res) => {
+      const data = await res.json();
+      if (data && data.errors) setErrors(data.errors);
+    });
+    setContent("");
+  };
 
   return (
     <div id="commentForm">
@@ -34,12 +35,12 @@ export default function CheckinForm() {
         Create Comment
       </h3>
       {showCommentForm && (
-        <form>
+        <form onSubmit={handleSubmit}>
           <div id="commentText">
             <textarea
               placeholder="Comment"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
             />
             <p>{errors.password}</p>
           </div>

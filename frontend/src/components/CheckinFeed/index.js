@@ -12,10 +12,14 @@ export default function CheckinFeed() {
   return (
     <div className="checkinFeedContainer">
       <div className="checkinHeader">
-        <input type="radio" name="header" id="all" />
-        <label htmlFor="all">Latest Checkins</label>
-        <input type="radio" name="header" id="yours" />
-        <label htmlFor="yours">Your Checkins</label>
+        <label htmlFor="all">
+          <input type="radio" name="header" id="all" />
+          <span>Latest Checkins</span>
+        </label>
+        <label htmlFor="yours">
+          <input type="radio" name="header" id="yours" checked />
+          <span>Your Checkins</span>
+        </label>
       </div>
       <ul>
         {checkins.length &&
