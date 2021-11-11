@@ -104,3 +104,6 @@ button:hover {
   height: 50px;
   width: 50px;
 }
+a#locations {
+  width: fit-content;
+}

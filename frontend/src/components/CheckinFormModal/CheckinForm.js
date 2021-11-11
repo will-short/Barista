@@ -6,7 +6,7 @@ import "./CheckinForm.css";
 
 export default function CheckinForm({ drinkId, ownerId, drinkImg }) {
   const dispatch = useDispatch();
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(5);
   const [description, setDescription] = useState("");
   const [errors, setErrors] = useState({});
   const [image, setImage] = useState();
@@ -43,13 +43,20 @@ export default function CheckinForm({ drinkId, ownerId, drinkImg }) {
       <h1>Create Checkin</h1>
       <form onSubmit={handleSubmit}>
         <div className="checkinFormHeader">
-          <div>
+          <div id="textareaWrapper">
             <textarea
               placeholder="caption"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              name="description"
             />
-            <p>{errors.password}</p>
+            <span
+              className={
+                description.length <= 0 || description.length > 40 ? "dis" : ""
+              }
+            >
+              {description.length}/40
+            </span>
           </div>
           <div className="img-container">
             <input
@@ -81,7 +88,12 @@ export default function CheckinForm({ drinkId, ownerId, drinkImg }) {
             <p>{errors.credential}</p>
           </div>
         </div>
-        <button type="submit">Create Checkin</button>
+        <button
+          type="submit"
+          disabled={description.length <= 0 || description.length > 40}
+        >
+          Create Checkin
+        </button>
       </form>
     </>
   );

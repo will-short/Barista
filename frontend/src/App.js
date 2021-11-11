@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import Navigation from "./components/Navigation";
 import * as sessionActions from "./store/session";
+import Locations from "./components/Locations";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,6 +20,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <HomePage />
+          </Route>
+          <Route path="/locations">
+            <Locations />
           </Route>
         </Switch>
       )}

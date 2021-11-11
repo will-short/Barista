@@ -9,3 +9,6 @@ body {
   height: 100vh;
   background-color: snow;
 }
+span.dis {
+  color: red;
+}

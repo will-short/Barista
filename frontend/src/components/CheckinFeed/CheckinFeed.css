@@ -95,16 +95,29 @@ input[type="radio"] {
   margin-top: 5px;
   font-size: 20px;
 }
-#commentContainer {
-  width: 70%;
-  display: grid;
-  height: 110px;
-  overflow-y: scroll;
-}
+
 #commentHeader {
   text-align: start;
   margin-bottom: 10px;
 }
 input:checked ~ span {
   font-weight: bold;
+}
+ul#commentContainer {
+  list-style-type: none;
+  padding-inline-start: 0px;
+  display: grid;
+  height: 110px;
+  row-gap: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+ul#commentContainer > li {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+ul#commentContainer > li > span {
+  margin-left: 5px;
+  overflow-wrap: break-word;
 }

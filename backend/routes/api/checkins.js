@@ -3,9 +3,17 @@ const asyncHandler = require("express-async-handler");
 const { Checkin, Drink, User, Comment } = require("../../db/models");
 
 const router = express.Router();
-
+const { check } = require("express-validator");
+const { handleValidationErrors } = require("../../utils/validation");
+const checkCheckin = [
+  check("description")
+    .exists({ checkFalsy: true })
+    .isLength({ min: 0, max: 40 }),
+  handleValidationErrors,
+];
 router.get(
   "/",
+
   asyncHandler(async (req, res) => {
     const checkins = await Checkin.all(Drink, User, Comment);
     res.json(checkins);
@@ -51,6 +59,7 @@ router.delete(
 );
 router.post(
   "/",
+  checkCheckin,
   asyncHandler(async (req, res) => {
     let { rating, description, drinkId, image, ownerId } = req.body;
     let checkin = await Checkin.makeNewCheckin(

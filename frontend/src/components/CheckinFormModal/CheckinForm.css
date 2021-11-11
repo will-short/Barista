@@ -25,3 +25,11 @@ label > span.material-icons-outlined {
 .img-container > label > img {
   width: 100px;
 }
+div#textareaWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+div#textareaWrapper > textarea {
+  padding: 10px;
+}

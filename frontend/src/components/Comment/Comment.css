@@ -4,6 +4,7 @@ li.updateComment {
   align-items: center;
   justify-content: flex-start;
   height: 27px;
+  font-size: 15px;
 }
 button.deleteComment {
   height: 70%;
@@ -29,4 +30,18 @@ button.updateComment:hover {
 input.updateComment {
   height: 100%;
   width: 60%;
+  font-size: 15px;
+}
+button:disabled {
+  background-color: grey;
+  cursor: auto;
+}
+button:disabled:hover {
+  background-color: grey;
+  cursor: auto;
+}
+img#commentImg {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }

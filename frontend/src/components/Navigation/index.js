@@ -58,9 +58,14 @@ function Navigation({ isLoaded }) {
   useEffect(() => {}, [hideList]);
   return (
     <nav>
-      <NavLink id="home" exact to="/">
-        <img src={logo} alt="" />
-      </NavLink>
+      <div>
+        <NavLink id="home" exact to="/">
+          <img src={logo} alt="" />
+        </NavLink>
+        <NavLink id="locations" to="/locations">
+          Locations
+        </NavLink>
+      </div>
       <div>
         {isLoaded && sessionLinks}
         <div className="search">

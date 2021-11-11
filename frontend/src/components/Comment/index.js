@@ -9,8 +9,21 @@ export default function Comment({ data }) {
   const sessionUser = useSelector((state) => state.session.user);
   const { id, content, User } = data;
   const [value, setValue] = useState(content);
+  const defaultProfileImg =
+    "https://res.cloudinary.com/dc9htgupc/image/upload/v1636321298/y7ig5h9stnxi2zcjrix4.png";
 
-  if (sessionUser?.id !== User?.id) return <li>{content}</li>;
+  if (sessionUser?.id !== User?.id)
+    return (
+      <li>
+        {console.log(User)}
+        <img
+          src={User.profile_image ? User.profile_image : defaultProfileImg}
+          alt=""
+          id="commentImg"
+        />
+        <span>{content}</span>
+      </li>
+    );
   function removeComment() {
     dispatch(deleteComment(id));
   }
@@ -28,11 +41,13 @@ export default function Comment({ data }) {
         onChange={(e) => setValue(e.target.value)}
         className="updateComment"
       />
-      {value !== content && (
-        <button className="updateComment" onClick={updateComment}>
-          Update
-        </button>
-      )}
+      <button
+        className="updateComment"
+        disabled={value === content}
+        onClick={updateComment}
+      >
+        Update
+      </button>
     </li>
   );
 }
