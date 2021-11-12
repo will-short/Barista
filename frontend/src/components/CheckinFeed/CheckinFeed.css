@@ -37,6 +37,7 @@
   align-items: center;
   justify-content: space-between;
   padding-left: 10px;
+  border-bottom: 1px solid grey;
 }
 .top > h3 {
   margin: 0;
@@ -78,6 +79,10 @@ input[type="radio"] {
   width: fit-content;
   margin: 0;
 }
+.update {
+  color: white;
+  background-color: dodgerblue;
+}
 .deleteButton {
   margin-top: 10px;
   color: red;
@@ -87,13 +92,23 @@ input[type="radio"] {
   background-color: transparent;
   color: black;
 }
+.update:hover {
+  color: white;
+  background-color: dodgerblue;
+}
+.update:disabled:hover {
+  color: white;
+}
 #descriptionfield {
   width: fit-content;
   max-width: 70%;
+  text-align: center;
 }
 #descriptionDiv {
   margin-top: 5px;
   font-size: 20px;
+  text-align: center;
+  margin-bottom: 5px;
 }
 
 #commentHeader {

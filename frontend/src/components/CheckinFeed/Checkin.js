@@ -63,29 +63,28 @@ export default function Checkin({ data }) {
         </h3>
         <div className="starRating">{stars(+rating)}</div>
       </div>
+      {sessionUser?.id === owner_id ? (
+        <div id="descriptionDiv">
+          <input
+            type="text"
+            name="description"
+            id="descriptionfield"
+            value={updateDisc || description}
+            onChange={(e) => setUpdateDisc(e.target.value)}
+          />
+          <button
+            className="update"
+            onClick={(e) => updateCheckin(updateDisc)}
+            disabled={description === updateDisc}
+          >
+            update
+          </button>
+        </div>
+      ) : (
+        <div id="descriptionDiv">{description}</div>
+      )}
       <img src={image} alt="" className="checkinImage" />
       <div className="checkinMain">
-        {sessionUser?.id === owner_id ? (
-          <div>
-            <input
-              type="text"
-              name="description"
-              id="descriptionfield"
-              value={updateDisc || description}
-              onChange={(e) => setUpdateDisc(e.target.value)}
-            />
-            {description !== updateDisc && (
-              <button
-                className="update"
-                onClick={(e) => updateCheckin(updateDisc)}
-              >
-                update
-              </button>
-            )}
-          </div>
-        ) : (
-          <div id="descriptionDiv">{description}</div>
-        )}
         <div>
           {sessionUser?.id === owner_id && (
             <button

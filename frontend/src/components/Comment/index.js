@@ -21,7 +21,7 @@ export default function Comment({ data }) {
           alt=""
           id="commentImg"
         />
-        <span>{content}</span>
+        <span>{`${User.username}: ${content}`}</span>
       </li>
     );
   function removeComment() {

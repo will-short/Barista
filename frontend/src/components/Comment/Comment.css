@@ -35,6 +35,7 @@ input.updateComment {
 button:disabled {
   background-color: grey;
   cursor: auto;
+  color: white;
 }
 button:disabled:hover {
   background-color: grey;
