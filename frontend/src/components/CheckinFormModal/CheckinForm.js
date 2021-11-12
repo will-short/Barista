@@ -14,12 +14,8 @@ export default function CheckinForm({ drinkId, ownerId, drinkImg }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
-    return dispatch(
-      postCheckin({ rating, description, drinkId, image, ownerId })
-    ).catch(async (res) => {
-      const data = await res.json();
-      if (data && data.errors) setErrors(data.errors);
-    });
+    dispatch(postCheckin({ rating, description, drinkId, image, ownerId }));
+    setDescription("");
   };
 
   const uploadImage = (image) => {

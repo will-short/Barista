@@ -14,6 +14,7 @@ export default function CheckinForm({ checkinId }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setTextLength(0);
     return dispatch(
       postComment({ content, checkinId, owner_id: sessionUser?.id })
     );
