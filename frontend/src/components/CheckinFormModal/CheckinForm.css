@@ -33,3 +33,14 @@ div#textareaWrapper {
 div#textareaWrapper > textarea {
   padding: 10px;
 }
+form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  place-items: center;
+}
+button#checkinButton {
+  grid-area: 3 / 1 / 4 / 4;
+}

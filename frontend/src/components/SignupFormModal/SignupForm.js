@@ -60,7 +60,7 @@ function SignupForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="signup">
       <img className="logo" src={logo} alt="" />
       <div className="img-container">
         <img src={profile_image} />

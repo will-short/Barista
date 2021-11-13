@@ -10,17 +10,18 @@ export default function Marker({ name, vicinity, photos }) {
   let photoRef = photos ? photos[0].photo_reference : null;
   return (
     <div id="markerWrapper">
-      <div id="marker" onClick={() => setShow(!show)}>
+      <div id="marker" onClick={show && (() => setShow(!show))}>
         {show ? (
           <span>{name}</span>
         ) : (
           <>
-            <span>{name}</span>
+            <span onClick={() => setShow(!show)}>{name}</span>
             <img
               src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${photoRef}&key=AIzaSyBynTKh6jKkL6pn5gHvhOIgFjHUXLvVfAA`}
               alt=""
+              onClick={() => setShow(!show)}
             />
-            <span>Location: {vicinity}</span>
+            <span onClick={() => setShow(!show)}>Location: {vicinity}</span>
             <CheckinFormModal />
           </>
         )}

@@ -23,7 +23,7 @@ function LoginForm() {
   return (
     <>
       <img className="logo" src={logo} alt="" />
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="login">
         <div>
           <input
             type="text"

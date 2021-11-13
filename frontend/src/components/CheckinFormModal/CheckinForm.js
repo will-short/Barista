@@ -38,38 +38,37 @@ export default function CheckinForm({ drinkId, ownerId, drinkImg }) {
     <>
       <h1>Create Checkin</h1>
       <form onSubmit={handleSubmit}>
-        <div className="checkinFormHeader">
-          <div id="textareaWrapper">
-            <textarea
-              placeholder="caption"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              name="description"
-            />
-            <span
-              className={
-                description.length <= 0 || description.length > 40 ? "dis" : ""
-              }
-            >
-              {description.length}/40
-            </span>
-          </div>
-          <div className="img-container">
-            <input
-              type="file"
-              onChange={(e) => uploadImage(e.target.files[0])}
-              id="img"
-              style={{ display: "none" }}
-            ></input>
-            <label htmlFor="img">
-              {image ? (
-                <img src={image} alt="" />
-              ) : (
-                <span class="material-icons-outlined">add_a_photo</span>
-              )}
-            </label>
-          </div>
+        <div id="textareaWrapper">
+          <textarea
+            placeholder="caption"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            name="description"
+          />
+          <span
+            className={
+              description.length <= 0 || description.length > 40 ? "dis" : ""
+            }
+          >
+            {description.length}/40
+          </span>
         </div>
+        <div className="img-container">
+          <input
+            type="file"
+            onChange={(e) => uploadImage(e.target.files[0])}
+            id="img"
+            style={{ display: "none" }}
+          ></input>
+          <label htmlFor="img">
+            {image ? (
+              <img src={image} alt="" />
+            ) : (
+              <span class="material-icons-outlined">add_a_photo</span>
+            )}
+          </label>
+        </div>
+        <div></div>
         <div className="inputs">
           <div>
             <label htmlFor="rating">{rating} Stars</label>
@@ -81,12 +80,12 @@ export default function CheckinForm({ drinkId, ownerId, drinkImg }) {
               placeholder="enter rating"
               onChange={(e) => setRating(+e.target.value / 2)}
             />
-            <p>{errors.credential}</p>
           </div>
         </div>
         <button
           type="submit"
           disabled={description.length <= 0 || description.length > 40}
+          id="checkinButton"
         >
           Create Checkin
         </button>

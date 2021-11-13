@@ -45,7 +45,6 @@ function Navigation({ isLoaded }) {
   searchDiv = document.querySelector(".search");
   function drinkList(e) {
     if (!drinks.length) {
-      dispatch(getAllDrinks());
       setHideList(true);
       return;
     }
@@ -76,21 +75,15 @@ function Navigation({ isLoaded }) {
             onFocus={drinkList}
             onChange={filter}
           />
-          {hideList && (
-            <div className="drinks-list">
-              {drinks.map(({ name, image, id }) => {
-                if (name?.toLowerCase().startsWith(search) || !search)
-                  return (
-                    <DrinkModal
-                      key={id}
-                      name={name}
-                      image={image}
-                      drinkId={id}
-                    />
-                  );
-              })}
-            </div>
-          )}
+
+          <div className="drinks-list" style={{ display: "none" }}>
+            {drinks.map(({ name, image, id }) => {
+              if (name?.toLowerCase().startsWith(search) || !search)
+                return (
+                  <DrinkModal key={id} name={name} image={image} drinkId={id} />
+                );
+            })}
+          </div>
         </div>
       </div>
     </nav>

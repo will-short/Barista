@@ -12,7 +12,7 @@
   background: lightblue;
   text-align: center;
   color: #000;
-  top: -50px;
+  bottom: 20px;
   cursor: pointer;
   display: grid;
   place-items: center;
@@ -31,12 +31,16 @@
   left: 0px;
   bottom: -15px;
 }
+
 #marker img {
   width: 100%;
 }
 #marker button {
   border-radius: 0;
-  height: 10px;
+  height: 15px;
   width: 100%;
   font-size: 12px;
+}
+#marker button:hover {
+  background-color: dodgerblue;
 }

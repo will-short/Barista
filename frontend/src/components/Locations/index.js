@@ -5,28 +5,7 @@ import GoogleMapReact from "google-map-react";
 import Marker from "./markers";
 import { getAllLocations } from "../../store/locations";
 
-export default function Locations() {
-  const [location, setLocation] = useState({
-    loaded: false,
-    coordinates: { lat: 0, lng: 0 },
-  });
-  const onSuccess = (loca) => {
-    setLocation({
-      loaded: true,
-      coordinates: {
-        lat: +loca.coords.latitude,
-        lng: +loca.coords.longitude,
-      },
-    });
-  };
-  useEffect(() => {
-    if (locations < 1 && location.loaded) {
-      dispatch(
-        getAllLocations(location.coordinates.lat, location.coordinates.lng)
-      );
-    }
-  }, [location]);
-  navigator.geolocation.getCurrentPosition(onSuccess);
+export default function Locations({ location }) {
   const dispatch = useDispatch();
 
   let locations = useSelector((state) => state.locations);
@@ -50,16 +29,18 @@ export default function Locations() {
           defaultZoom={zoom}
           onCenterChanged={(e) => console.log("works!!!!!!")}
         >
-          {locations?.map(({ geometry, name, vicinity, photos }, index) => (
-            <Marker
-              key={index}
-              lat={+geometry.location.lat}
-              lng={+geometry.location.lng}
-              name={name}
-              vicinity={vicinity}
-              photos={photos}
-            />
-          ))}
+          {locations?.map(
+            ({ geometry, name, formatted_address, photos }, index) => (
+              <Marker
+                key={index}
+                lat={+geometry.location.lat}
+                lng={+geometry.location.lng}
+                name={name}
+                vicinity={formatted_address}
+                photos={photos}
+              />
+            )
+          )}
         </GoogleMapReact>
       </div>
     </div>
