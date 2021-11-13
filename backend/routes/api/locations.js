@@ -10,7 +10,7 @@ router.get(
     const data = req.params.data;
     const config = {
       method: "get",
-      url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?keyword=coffee&hasNextPage=true&nextPage()=true&sensor=false&location=${data}&radius=6000&region=us&key=AIzaSyBynTKh6jKkL6pn5gHvhOIgFjHUXLvVfAA`,
+      url: `https://maps.googleapis.com/maps/api/place/textsearch/json?query=coffee&type=cafe&location=${data}&radius=6000&region=us&key=AIzaSyBynTKh6jKkL6pn5gHvhOIgFjHUXLvVfAA`,
       headers: {},
     };
 

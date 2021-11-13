@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Locations.css";
 import GoogleMapReact from "google-map-react";
 import "./markers.css";
+import CheckinFormModal from "../CheckinFormModal";
 
 export default function Marker({ name, vicinity, photos }) {
   const [show, setShow] = useState(true);
@@ -20,6 +21,7 @@ export default function Marker({ name, vicinity, photos }) {
               alt=""
             />
             <span>Location: {vicinity}</span>
+            <CheckinFormModal />
           </>
         )}
       </div>

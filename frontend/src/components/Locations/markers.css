@@ -34,3 +34,9 @@
 #marker img {
   width: 100%;
 }
+#marker button {
+  border-radius: 0;
+  height: 10px;
+  width: 100%;
+  font-size: 12px;
+}

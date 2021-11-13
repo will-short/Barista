@@ -6,28 +6,35 @@ import Marker from "./markers";
 import { getAllLocations } from "../../store/locations";
 
 export default function Locations() {
-  const dispatch = useDispatch();
   const [location, setLocation] = useState({
     loaded: false,
     coordinates: { lat: 0, lng: 0 },
   });
-
-  const onSuccess = (location) => {
+  const onSuccess = (loca) => {
     setLocation({
-      location: true,
+      loaded: true,
       coordinates: {
-        lat: +location.coords.latitude,
-        lng: +location.coords.longitude,
+        lat: +loca.coords.latitude,
+        lng: +loca.coords.longitude,
       },
     });
   };
-
+  useEffect(() => {
+    if (locations < 1 && location.loaded) {
+      dispatch(
+        getAllLocations(location.coordinates.lat, location.coordinates.lng)
+      );
+    }
+  }, [location]);
   navigator.geolocation.getCurrentPosition(onSuccess);
+  const dispatch = useDispatch();
+
   let locations = useSelector((state) => state.locations);
-  if (!locations.length)
+  if (locations < 1 && location.loaded) {
     dispatch(
       getAllLocations(location.coordinates.lat, location.coordinates.lng)
     );
+  }
 
   const zoom = 12;
 
@@ -35,10 +42,10 @@ export default function Locations() {
     <div id="locations">
       <div id="mapWrapper">
         <GoogleMapReact
-          apiKey={"AIzaSyBynTKh6jKkL6pn5gHvhOIgFjHUXLvVfAA"}
           bootstrapURLKeys={{
             key: "AIzaSyBynTKh6jKkL6pn5gHvhOIgFjHUXLvVfAA",
           }}
+          defaultCenter={location.coordinates}
           center={location.coordinates}
           defaultZoom={zoom}
           onCenterChanged={(e) => console.log("works!!!!!!")}
