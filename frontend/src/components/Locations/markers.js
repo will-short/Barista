@@ -22,7 +22,7 @@ export default function Marker({ name, vicinity, photos }) {
               onClick={() => setShow(!show)}
             />
             <span onClick={() => setShow(!show)}>Location: {vicinity}</span>
-            <CheckinFormModal />
+            <CheckinFormModal location={name} />
           </>
         )}
       </div>

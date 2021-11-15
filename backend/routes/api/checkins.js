@@ -61,7 +61,7 @@ router.post(
   "/",
   checkCheckin,
   asyncHandler(async (req, res) => {
-    let { rating, description, drinkId, image, ownerId } = req.body;
+    let { rating, description, drinkId, image, ownerId, location } = req.body;
     let checkin = await Checkin.makeNewCheckin(
       {
         rating: +rating,
@@ -69,6 +69,7 @@ router.post(
         drink_id: drinkId,
         image,
         owner_id: ownerId,
+        location,
       },
       Drink,
       User

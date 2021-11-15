@@ -4,24 +4,41 @@ import { useDispatch, useSelector } from "react-redux";
 import { postCheckin } from "../../store/checkins";
 import "./CheckinForm.css";
 
-export default function CheckinForm({ drinkId, ownerId, close, closeDrink }) {
+export default function CheckinForm(data) {
+  console.log(data);
+  let { drinkId, close, closeDrink, location } = data;
   const dispatch = useDispatch();
   const [rating, setRating] = useState(5);
   const [description, setDescription] = useState("");
-  const [info, setInfo] = useState({});
+  const [info, setInfo] = useState("");
   const [image, setImage] = useState();
+  console.log(location);
+  const drinks = useSelector((state) => state.drinks);
+  const sessionUser = useSelector((state) => state.session.user);
 
   const handleSubmit = (e) => {
     close();
-    closeDrink();
+    drinkId && closeDrink();
     e.preventDefault();
+    if (typeof +info === "number") {
+      drinkId = +info;
+    } else {
+      location = info;
+    }
+    let ownerId = sessionUser.id;
     dispatch(
-      postCheckin({ rating, description, drinkId, image, ownerId, info })
+      postCheckin({
+        rating,
+        description,
+        drinkId,
+        image,
+        ownerId,
+        location,
+      })
     );
     setDescription("");
   };
 
-  const drinks = useSelector((state) => state.drinks);
   const locations = useSelector((state) => state.locations);
   const uploadImage = (image) => {
     const data = new FormData();
@@ -69,6 +86,8 @@ export default function CheckinForm({ drinkId, ownerId, close, closeDrink }) {
             </option>
             {drinkId &&
               locationNames.map((name) => <option value={name}>{name}</option>)}
+            {!drinkId &&
+              drinks.map(({ id, name }) => <option value={+id}>{name}</option>)}
           </select>
         </div>
         <div className="img-container">

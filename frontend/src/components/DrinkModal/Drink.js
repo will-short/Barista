@@ -30,9 +30,9 @@ export default function Drink({ drinkId, closeDrink }) {
         {sessionUser && (
           <CheckinFormModal
             drinkId={drinkId}
-            ownerId={sessionUser?.id}
             drinkImg={image}
             closeDrink={closeDrink}
+            location={null}
           />
         )}
       </footer>

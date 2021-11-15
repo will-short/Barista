@@ -12,7 +12,7 @@ import { useLocation } from "react-router-dom";
 export default function Checkin({ data }) {
   let {
     description,
-    drink_id,
+    checkinLocation,
     image,
     rating,
     owner_id,
@@ -72,11 +72,19 @@ export default function Checkin({ data }) {
           alt=""
           className="profileImage"
         />
-        <h3>
-          {User?.name ? User?.name : User?.username}
-          <span>is drinking a</span>
-          {Drink?.name}
-        </h3>
+        <div id="h3s">
+          <h3>
+            {User?.name ? User?.name : User?.username}
+            <span>is drinking a</span>
+            {Drink?.name}
+          </h3>
+          {checkinLocation && (
+            <h3>
+              <span>at</span>
+              {checkinLocation}
+            </h3>
+          )}
+        </div>
         <div className="starRating">{stars(+rating)}</div>
       </div>
       {sessionUser?.id === owner_id && isProfile ? (

@@ -46,4 +46,8 @@ button#checkinButton {
 }
 div#dropDown > select {
   width: 100%;
+  height: 50%;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 10px;
 }

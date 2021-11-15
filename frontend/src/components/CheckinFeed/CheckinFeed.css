@@ -39,17 +39,12 @@
   padding-left: 10px;
   border-bottom: 1px solid grey;
 }
-.top > h3 {
+#h3s > h3 {
   margin: 0;
   margin-left: 5px;
   text-align: start;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  word-wrap: break-word;
-  height: 100%;
 }
-.top > h3 > span {
+#h3s > h3 > span {
   font-weight: normal;
   margin-left: 5px;
   margin-right: 5px;

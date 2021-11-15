@@ -24,6 +24,7 @@ export default function CheckinFeed({ checkins }) {
               Drink,
               User,
               Comments,
+              location,
             }) => (
               <Checkin
                 key={id}
@@ -37,6 +38,7 @@ export default function CheckinFeed({ checkins }) {
                   Drink,
                   User,
                   Comments,
+                  checkinLocation: location,
                 }}
               />
             )
