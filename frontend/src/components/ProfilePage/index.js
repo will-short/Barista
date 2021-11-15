@@ -10,10 +10,14 @@ export default function ProfilePage() {
   let { name, profile_image, username, location } = sessionUser;
   return (
     <div id="profileMain">
-      <img
-        src="https://res.cloudinary.com/dc9htgupc/image/upload/c_crop,g_east,h_900,w_3400/v1636839742/cs80o2jkayxzlxzpkjni.jpg"
-        id="profileHeader"
-      ></img>
+      <div id="profileHeader">
+        <div id="info">
+          <img src={profile_image} alt="" />
+          <h2>{name}</h2>
+          <div>{username}</div>
+          <div>{location}</div>
+        </div>
+      </div>
       <div id="postedCheckins"></div>
       <div id="commentedCheckins"></div>
     </div>
