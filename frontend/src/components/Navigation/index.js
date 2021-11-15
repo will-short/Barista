@@ -9,6 +9,7 @@ import { getAllDrinks } from "../../store/drinks";
 import DrinkModal from "../DrinkModal";
 import "./Navigation.css";
 import logo from "../../images/Barista-logo-text.png";
+import { getAllLocations } from "../../store/locations";
 
 let searchDiv;
 
@@ -18,6 +19,7 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const [hideList, setHideList] = useState(false);
   const [search, setSearch] = useState("");
+
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = <ProfileButton user={sessionUser} />;
@@ -62,7 +64,7 @@ function Navigation({ isLoaded }) {
           <img src={logo} alt="" />
         </NavLink>
         <NavLink id="locations" to="/locations">
-          Locations
+          Coffee Shops
         </NavLink>
       </div>
       <div>

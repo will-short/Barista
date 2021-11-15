@@ -16,6 +16,14 @@ export default function Locations({ location }) {
   }
 
   const zoom = 12;
+  if (!location.coordinates) {
+    return (
+      <h1>
+        This feature requires location permissions. Please enable Location and
+        reload page
+      </h1>
+    );
+  }
 
   return (
     <div id="locations">

@@ -28,6 +28,8 @@ module.exports = {
       },
       profile_image: {
         type: Sequelize.STRING,
+        defaultValue:
+          "https://res.cloudinary.com/dc9htgupc/image/upload/v1636321298/y7ig5h9stnxi2zcjrix4.png",
       },
       location: {
         type: Sequelize.STRING,

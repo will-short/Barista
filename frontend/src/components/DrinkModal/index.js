@@ -20,7 +20,7 @@ export default function DrinkModal({ image, name, drinkId }) {
       </button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          {<Drink drinkId={drinkId} />}
+          {<Drink drinkId={drinkId} closeDrink={() => setShowModal(false)} />}
         </Modal>
       )}
     </>

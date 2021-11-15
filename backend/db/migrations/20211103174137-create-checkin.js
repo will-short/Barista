@@ -22,9 +22,8 @@ module.exports = {
         type: Sequelize.INTEGER,
         references: { model: "Drinks" },
       },
-      location_id: {
-        type: Sequelize.INTEGER,
-        references: { model: "Locations" },
+      location: {
+        type: Sequelize.STRING,
       },
       owner_id: {
         allowNull: false,

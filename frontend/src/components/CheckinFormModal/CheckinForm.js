@@ -4,20 +4,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { postCheckin } from "../../store/checkins";
 import "./CheckinForm.css";
 
-export default function CheckinForm({ drinkId, ownerId, drinkImg }) {
+export default function CheckinForm({ drinkId, ownerId, close, closeDrink }) {
   const dispatch = useDispatch();
   const [rating, setRating] = useState(5);
   const [description, setDescription] = useState("");
-  const [errors, setErrors] = useState({});
+  const [info, setInfo] = useState({});
   const [image, setImage] = useState();
 
   const handleSubmit = (e) => {
+    close();
+    closeDrink();
     e.preventDefault();
-    setErrors([]);
-    dispatch(postCheckin({ rating, description, drinkId, image, ownerId }));
+    dispatch(
+      postCheckin({ rating, description, drinkId, image, ownerId, info })
+    );
     setDescription("");
   };
 
+  const drinks = useSelector((state) => state.drinks);
+  const locations = useSelector((state) => state.locations);
   const uploadImage = (image) => {
     const data = new FormData();
     data.append("file", image);
@@ -33,11 +38,11 @@ export default function CheckinForm({ drinkId, ownerId, drinkImg }) {
       })
       .catch((err) => console.log(err));
   };
-
+  let locationNames = [...new Set(locations.map(({ name }) => name))];
   return (
     <>
-      <h1>Create Checkin</h1>
-      <form onSubmit={handleSubmit}>
+      <h1>Checkin</h1>
+      <form onSubmit={handleSubmit} className="checkinForm">
         <div id="textareaWrapper">
           <textarea
             placeholder="caption"
@@ -52,6 +57,19 @@ export default function CheckinForm({ drinkId, ownerId, drinkImg }) {
           >
             {description.length}/40
           </span>
+        </div>
+        <div id="dropDown">
+          <select
+            name="info"
+            id="info"
+            onChange={(e) => setInfo(e.target.value)}
+          >
+            <option value="" disabled selected>
+              {drinkId ? "Select a Coffee Shop" : "Select a Coffee"}
+            </option>
+            {drinkId &&
+              locationNames.map((name) => <option value={name}>{name}</option>)}
+          </select>
         </div>
         <div className="img-container">
           <input
@@ -68,7 +86,6 @@ export default function CheckinForm({ drinkId, ownerId, drinkImg }) {
             )}
           </label>
         </div>
-        <div></div>
         <div className="inputs">
           <div>
             <label htmlFor="rating">{rating} Stars</label>

@@ -14,7 +14,6 @@ export default function Checkin({ data }) {
     description,
     drink_id,
     image,
-    location_id,
     rating,
     owner_id,
     id,
@@ -39,14 +38,18 @@ export default function Checkin({ data }) {
   let url = location.pathname;
   let isProfile = url.endsWith("profile");
 
-  let selfComments = Comments.filter(
+  let selfComments = Comments?.filter(
     ({ owner_id }) => +owner_id === +sessionUser.id
   );
-  let otherComments = Comments.filter(
+  let otherComments = Comments?.filter(
     ({ owner_id }) => +owner_id !== +sessionUser.id
   ).reverse();
-  let formattedComments = [...selfComments, ...otherComments];
-  console.log(selfComments);
+
+  let formattedComments = [];
+  if (selfComments) formattedComments = [...selfComments];
+  if (otherComments)
+    formattedComments = [...formattedComments, ...otherComments];
+
   function stars(rating) {
     let stars = [];
     for (let i = 0; i < 5; i++) {

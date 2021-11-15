@@ -45,6 +45,9 @@
   text-align: start;
   display: flex;
   justify-content: flex-start;
+  align-items: center;
+  word-wrap: break-word;
+  height: 100%;
 }
 .top > h3 > span {
   font-weight: normal;
