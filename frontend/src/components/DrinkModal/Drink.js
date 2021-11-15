@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector } from "react-redux";
 import "./Drink.css";
 import CheckinFormModal from "../CheckinFormModal";
 
-export default function Drink({ drinkId }) {
+export default function Drink({ drinkId, closeDrink }) {
   const drinks = useSelector((state) => state.drinks);
   const currentDrink = drinks.find((drink) => drink.id === drinkId);
   const sessionUser = useSelector((state) => state.session.user);
@@ -30,8 +30,9 @@ export default function Drink({ drinkId }) {
         {sessionUser && (
           <CheckinFormModal
             drinkId={drinkId}
-            ownerId={sessionUser?.id}
             drinkImg={image}
+            closeDrink={closeDrink}
+            location={null}
           />
         )}
       </footer>

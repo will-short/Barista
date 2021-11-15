@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
       image: DataTypes.STRING,
       rating: DataTypes.NUMERIC,
       drink_id: DataTypes.INTEGER,
-      location_id: DataTypes.INTEGER,
+      location: DataTypes.STRING,
       owner_id: DataTypes.INTEGER,
     },
     {}
@@ -41,13 +41,7 @@ module.exports = (sequelize, DataTypes) => {
 
     return checkins;
   };
-  Checkin.locationCheckins = async function (location_id) {
-    const checkins = await Checkin.findAll({
-      where: { location_id },
-    });
 
-    return checkins;
-  };
   Checkin.update = async function (updateValue, id) {
     let checkin = await Checkin.findByPk(id);
     let updatedCheckin = await checkin.update({ description: updateValue });

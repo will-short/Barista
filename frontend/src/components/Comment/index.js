@@ -1,16 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteComment, editComment } from "../../store/checkins";
-import CommentForm from "../CommentForm";
 import "./Comment.css";
+import { useLocation } from "react-router-dom";
 
 export default function Comment({ data }) {
   const dispatch = useDispatch();
+  const location = useLocation();
+
+  let url = location.pathname;
+  let isProfile = url.endsWith("profile");
   const sessionUser = useSelector((state) => state.session.user);
   const { id, content, User } = data;
   const [value, setValue] = useState(content);
 
-  if (sessionUser?.id !== User?.id) return <li>{content}</li>;
+  if (sessionUser?.id !== User?.id || !isProfile)
+    return (
+      <li>
+        <img src={User.profile_image} alt="" id="commentImg" />
+        <span>{`${User.username}: ${content}`}</span>
+      </li>
+    );
   function removeComment() {
     dispatch(deleteComment(id));
   }
@@ -28,11 +38,13 @@ export default function Comment({ data }) {
         onChange={(e) => setValue(e.target.value)}
         className="updateComment"
       />
-      {value !== content && (
-        <button className="updateComment" onClick={updateComment}>
-          Update
-        </button>
-      )}
+      <button
+        className="updateComment"
+        disabled={value === content}
+        onClick={updateComment}
+      >
+        Update
+      </button>
     </li>
   );
 }

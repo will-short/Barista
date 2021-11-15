@@ -1,8 +1,14 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
 const { User, Comment, Drink } = require("../../db/models");
-
+const { check } = require("express-validator");
+const { handleValidationErrors } = require("../../utils/validation");
 const router = express.Router();
+
+const checkComment = [
+  check("content").exists({ checkFalsy: true }).isLength({ min: 0, max: 40 }),
+  handleValidationErrors,
+];
 router.get(
   "/:checkinid",
   asyncHandler(async (req, res) => {
@@ -13,6 +19,7 @@ router.get(
 );
 router.post(
   "/",
+  checkComment,
   asyncHandler(async (req, res) => {
     const { content, checkinId, owner_id } = req.body;
     const comment = await Comment.makeNewComment(
@@ -23,7 +30,7 @@ router.post(
       },
       User
     );
-    res.json(comment);
+    return res.json(comment);
   })
 );
 router.put(

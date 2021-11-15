@@ -1,13 +1,13 @@
 .checkinFeedContainer {
-  width: 100%;
+  width: 550px;
   height: 70vh;
-
+  margin: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .checkinFeedContainer > ul {
-  width: 98%;
+  width: 100%;
   height: 600px;
   list-style-type: none;
   margin: 0px;
@@ -37,16 +37,14 @@
   align-items: center;
   justify-content: space-between;
   padding-left: 10px;
+  border-bottom: 1px solid grey;
 }
-.top > h3 {
+#h3s > h3 {
   margin: 0;
   margin-left: 5px;
   text-align: start;
-  display: flex;
-  justify-content: flex-start;
-  width: 70%;
 }
-.top > h3 > span {
+#h3s > h3 > span {
   font-weight: normal;
   margin-left: 5px;
   margin-right: 5px;
@@ -78,6 +76,10 @@ input[type="radio"] {
   width: fit-content;
   margin: 0;
 }
+.update {
+  color: white;
+  background-color: dodgerblue;
+}
 .deleteButton {
   margin-top: 10px;
   color: red;
@@ -87,24 +89,52 @@ input[type="radio"] {
   background-color: transparent;
   color: black;
 }
+.update:hover {
+  color: white;
+  background-color: dodgerblue;
+}
+.update:disabled:hover {
+  color: white;
+}
 #descriptionfield {
   width: fit-content;
   max-width: 70%;
+  text-align: center;
 }
 #descriptionDiv {
   margin-top: 5px;
   font-size: 20px;
+  text-align: center;
+  margin-bottom: 5px;
 }
-#commentContainer {
-  width: 70%;
-  display: grid;
-  height: 110px;
-  overflow-y: scroll;
-}
+
 #commentHeader {
   text-align: start;
   margin-bottom: 10px;
 }
 input:checked ~ span {
   font-weight: bold;
+}
+ul#commentContainer {
+  list-style-type: none;
+  padding-inline-start: 0px;
+  display: grid;
+  height: 110px;
+  row-gap: 10px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+ul#commentContainer > li {
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+ul#commentContainer > li > span {
+  margin-left: 5px;
+  overflow-wrap: break-word;
+}
+div#deleteContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

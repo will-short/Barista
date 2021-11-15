@@ -3,9 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import "./HomePage.css";
 import UserInfo from "./UserInfo";
 import CheckinFeed from "../CheckinFeed";
+import { getAllLocations } from "../../store/locations";
 
-export default function HomePage() {
+export default function HomePage({ location }) {
+  const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const checkins = useSelector((state) => state.checkins);
+  const locations = useSelector((state) => state.locations);
+
+  useEffect(() => {
+    if (locations < 1 && location.loaded) {
+      dispatch(
+        getAllLocations(location.coordinates.lat, location.coordinates.lng)
+      );
+    }
+  }, [dispatch]);
+
   let sideBar;
   if (sessionUser) {
     sideBar = <UserInfo />;
@@ -24,7 +37,9 @@ export default function HomePage() {
     <main>
       <div className="checkin-feed">
         <h2>Recent Activity</h2>
-        <CheckinFeed />
+        <div className="checkinFeedContainer">
+          <CheckinFeed checkins={checkins} />
+        </div>
       </div>
       <aside>{sideBar}</aside>
     </main>

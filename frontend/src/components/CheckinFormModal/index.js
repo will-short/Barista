@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import CheckinForm from "./CheckinForm";
-import { useDispatch, useSelector } from "react-redux";
 
-export default function CheckinFormModal({ drinkId, ownerId, drinkImg }) {
+export default function CheckinFormModal({
+  drinkImg,
+  closeDrink,
+  drinkId,
+  location,
+}) {
   const [showModal, setShowModal] = useState(false);
   const searchDiv = document.querySelector(".search");
 
@@ -21,10 +25,11 @@ export default function CheckinFormModal({ drinkId, ownerId, drinkImg }) {
         <Modal onClose={() => setShowModal(false)}>
           {
             <CheckinForm
-              drinkId={drinkId}
-              ownerId={ownerId}
               close={() => setShowModal(false)}
               drinkImg={drinkImg}
+              closeDrink={closeDrink}
+              drinkId={drinkId}
+              location={location}
             />
           }
         </Modal>

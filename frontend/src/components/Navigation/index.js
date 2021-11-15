@@ -5,7 +5,6 @@ import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import * as sessionActions from "../../store/session";
-import { getAllDrinks } from "../../store/drinks";
 import DrinkModal from "../DrinkModal";
 import "./Navigation.css";
 import logo from "../../images/Barista-logo-text.png";
@@ -18,6 +17,7 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const [hideList, setHideList] = useState(false);
   const [search, setSearch] = useState("");
+
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = <ProfileButton user={sessionUser} />;
@@ -45,7 +45,6 @@ function Navigation({ isLoaded }) {
   searchDiv = document.querySelector(".search");
   function drinkList(e) {
     if (!drinks.length) {
-      dispatch(getAllDrinks());
       setHideList(true);
       return;
     }
@@ -58,34 +57,33 @@ function Navigation({ isLoaded }) {
   useEffect(() => {}, [hideList]);
   return (
     <nav>
-      <NavLink id="home" exact to="/">
-        <img src={logo} alt="" />
-      </NavLink>
+      <div>
+        <NavLink id="home" exact to="/">
+          <img src={logo} alt="" />
+        </NavLink>
+        <NavLink id="locations" to="/locations">
+          Coffee Shops
+        </NavLink>
+      </div>
       <div>
         {isLoaded && sessionLinks}
         <div className="search">
           <input
             type="search"
-            placeholder="Find a Drink or Location"
+            placeholder="Find a Drink"
             id="searchBar"
             onFocus={drinkList}
             onChange={filter}
           />
-          {hideList && (
-            <div className="drinks-list">
-              {drinks.map(({ name, image, id }) => {
-                if (name?.toLowerCase().startsWith(search) || !search)
-                  return (
-                    <DrinkModal
-                      key={id}
-                      name={name}
-                      image={image}
-                      drinkId={id}
-                    />
-                  );
-              })}
-            </div>
-          )}
+
+          <div className="drinks-list" style={{ display: "none" }}>
+            {drinks.map(({ name, image, id }) => {
+              if (name?.toLowerCase().startsWith(search) || !search)
+                return (
+                  <DrinkModal key={id} name={name} image={image} drinkId={id} />
+                );
+            })}
+          </div>
         </div>
       </div>
     </nav>

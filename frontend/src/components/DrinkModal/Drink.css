@@ -63,3 +63,7 @@ p {
 footer > button:hover {
   background-color: dodgerblue;
 }
+footer {
+  display: flex;
+  justify-content: center;
+}

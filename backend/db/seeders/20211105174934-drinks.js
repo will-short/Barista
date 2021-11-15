@@ -4,9 +4,9 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert("Drinks", [
       {
-        name: "Black",
+        name: "Coffee",
         description:
-          "Black coffee is as simple as it gets with ground coffee beans steeped in hot water, served warm. And if you want to sound fancy, you can call black coffee by its proper name: cafe noir.",
+          "Coffee is as simple as it gets with ground coffee beans steeped in hot water, served warm.",
         ingredients: "Coffee",
         image:
           "https://res.cloudinary.com/dc9htgupc/image/upload/v1636405352/drink%20images/cdzak4f4llomf4mdjlqi.jpg",
