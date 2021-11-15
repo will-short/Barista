@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation";
 import * as sessionActions from "./store/session";
 import Locations from "./components/Locations";
 import { getAllDrinks } from "./store/drinks";
+import ProfilePage from "./components/ProfilePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route path="/locations">
             <Locations location={location} />
+          </Route>
+          <Route path="/profile">
+            <ProfilePage />
           </Route>
         </Switch>
       )}

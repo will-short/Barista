@@ -12,3 +12,13 @@ body {
 span.dis {
   color: red;
 }
+form.login,
+form.signup,
+form.comment {
+  display: grid;
+  place-items: center;
+  width: 80%;
+  height: fit-content;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+}

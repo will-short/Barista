@@ -34,6 +34,7 @@ export default function CheckinForm({ checkinId }) {
         </h3>
         {showCommentForm && (
           <form
+            className="comment"
             onSubmit={(e) => {
               handleSubmit(e);
               setContent("");

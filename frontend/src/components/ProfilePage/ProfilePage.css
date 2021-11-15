@@ -1,0 +1,15 @@
+div#profileMain {
+  height: calc(100% - 80px);
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+#profileHeader {
+  width: 70vw;
+  height: auto;
+  /* aspect-ratio: 16/9;
+  background-image: url("https://res.cloudinary.com/dc9htgupc/image/upload/v1636839448/zvjqukzskna8mxkuhues.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover; */
+}

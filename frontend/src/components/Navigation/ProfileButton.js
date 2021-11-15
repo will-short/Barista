@@ -45,12 +45,12 @@ function ProfileButton({ user }) {
         {showMenu && (
           <ul className="profile-dropdown">
             <li>
-              <Link>
+              <Link exact to="/">
                 <i className="material-icons-outlined">feed</i> Recent Activity
               </Link>
             </li>
             <li>
-              <Link>
+              <Link to="/profile">
                 <i className="material-icons-outlined"> account_circle</i> My
                 Profile
               </Link>
