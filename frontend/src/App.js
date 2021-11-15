@@ -8,7 +8,7 @@ import Locations from "./components/Locations";
 import { getAllDrinks } from "./store/drinks";
 import ProfilePage from "./components/ProfilePage";
 import { getAllCheckins } from "./store/checkins";
-import { getAllLocations } from "./store/locations";
+
 function App() {
   const dispatch = useDispatch();
   const [location, setLocation] = useState({});

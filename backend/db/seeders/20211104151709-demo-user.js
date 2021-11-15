@@ -13,6 +13,8 @@ module.exports = {
           username: "Demo-lition",
           hashed_password: bcrypt.hashSync("password"),
           location: "Chicago",
+          profile_image:
+            "https://res.cloudinary.com/dc9htgupc/image/upload/c_fill,h_200,w_200/v1636578728/pmp8vba5hxtvgowpymnn.png",
         },
         {
           name: "fake user1",
@@ -20,6 +22,8 @@ module.exports = {
           username: "FakeUser1",
           hashed_password: bcrypt.hashSync(faker.internet.password()),
           location: "St louis",
+          profile_image:
+            "https://res.cloudinary.com/dc9htgupc/image/upload/c_fill,h_200,w_200/v1636971690/wmj2qlrfbre2mnnadrm0.jpg",
         },
         {
           name: "fake user2",
@@ -27,6 +31,8 @@ module.exports = {
           username: "FakeUser2",
           hashed_password: bcrypt.hashSync(faker.internet.password()),
           location: "Indianapolis",
+          profile_image:
+            "https://res.cloudinary.com/dc9htgupc/image/upload/c_fill,h_200,w_200/v1636971707/n2wqldnvylbhtvxkljbm.jpg",
         },
       ],
       {}

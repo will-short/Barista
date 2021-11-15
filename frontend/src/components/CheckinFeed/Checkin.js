@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getAllCheckins,
-  deleteCheckin,
-  editCheckin,
-} from "../../store/checkins";
+import { deleteCheckin, editCheckin } from "../../store/checkins";
 import CommentForm from "../CommentForm";
 import Comment from "../Comment";
 import { useLocation } from "react-router-dom";
@@ -25,8 +21,6 @@ export default function Checkin({ data }) {
   const [updateDisc, setUpdateDisc] = useState(description);
   const dispatch = useDispatch();
   const location = useLocation();
-  const defaultProfileImg =
-    "https://res.cloudinary.com/dc9htgupc/image/upload/v1636321298/y7ig5h9stnxi2zcjrix4.png";
   const sessionUser = useSelector((state) => state.session.user);
   async function deleteCheckinAction(id) {
     await dispatch(deleteCheckin(id));
@@ -38,18 +32,20 @@ export default function Checkin({ data }) {
   let url = location.pathname;
   let isProfile = url.endsWith("profile");
 
-  let selfComments = Comments?.filter(
-    ({ owner_id }) => +owner_id === +sessionUser.id
-  );
-  let otherComments = Comments?.filter(
-    ({ owner_id }) => +owner_id !== +sessionUser.id
-  ).reverse();
-
   let formattedComments = [];
-  if (selfComments) formattedComments = [...selfComments];
-  if (otherComments)
-    formattedComments = [...formattedComments, ...otherComments];
-
+  if (sessionUser) {
+    let selfComments = Comments?.filter(
+      ({ owner_id }) => +owner_id === +sessionUser.id
+    );
+    let otherComments = Comments?.filter(
+      ({ owner_id }) => +owner_id !== +sessionUser.id
+    ).reverse();
+    if (selfComments) formattedComments = [...selfComments];
+    if (otherComments)
+      formattedComments = [...formattedComments, ...otherComments];
+  } else {
+    formattedComments = Comments?.reverse();
+  }
   function stars(rating) {
     let stars = [];
     for (let i = 0; i < 5; i++) {
@@ -67,11 +63,7 @@ export default function Checkin({ data }) {
   return (
     <li>
       <div className="top">
-        <img
-          src={User?.profile_image ? User?.profile_image : defaultProfileImg}
-          alt=""
-          className="profileImage"
-        />
+        <img src={User?.profile_image} alt="" className="profileImage" />
         <div id="h3s">
           <h3>
             {User?.name ? User?.name : User?.username}

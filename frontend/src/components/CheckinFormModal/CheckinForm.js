@@ -5,14 +5,12 @@ import { postCheckin } from "../../store/checkins";
 import "./CheckinForm.css";
 
 export default function CheckinForm(data) {
-  console.log(data);
   let { drinkId, close, closeDrink, location } = data;
   const dispatch = useDispatch();
   const [rating, setRating] = useState(5);
   const [description, setDescription] = useState("");
   const [info, setInfo] = useState("");
   const [image, setImage] = useState();
-  console.log(location);
   const drinks = useSelector((state) => state.drinks);
   const sessionUser = useSelector((state) => state.session.user);
 
@@ -20,7 +18,7 @@ export default function CheckinForm(data) {
     close();
     drinkId && closeDrink();
     e.preventDefault();
-    if (typeof +info === "number") {
+    if (!isNaN(+info) && +info > 0) {
       drinkId = +info;
     } else {
       location = info;
@@ -80,14 +78,23 @@ export default function CheckinForm(data) {
             name="info"
             id="info"
             onChange={(e) => setInfo(e.target.value)}
+            required={!drinkId}
           >
             <option value="" disabled selected>
               {drinkId ? "Select a Coffee Shop" : "Select a Coffee"}
             </option>
             {drinkId &&
-              locationNames.map((name) => <option value={name}>{name}</option>)}
+              locationNames.map((name, indx) => (
+                <option key={indx} value={name}>
+                  {name}
+                </option>
+              ))}
             {!drinkId &&
-              drinks.map(({ id, name }) => <option value={+id}>{name}</option>)}
+              drinks.map(({ id, name }) => (
+                <option key={+id} value={+id}>
+                  {name}
+                </option>
+              ))}
           </select>
         </div>
         <div className="img-container">

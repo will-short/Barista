@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as sessionActions from "../../store/session";
 import logo from "../../images/Barista-logo-text.png";
-import { uploadImage } from "../utils";
 
 function SignupForm() {
   const dispatch = useDispatch();
@@ -14,7 +13,7 @@ function SignupForm() {
   const [location, setLocation] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [profile_image, setProfile_image] = useState(
-    "https://res.cloudinary.com/dc9htgupc/image/upload/v1636321298/y7ig5h9stnxi2zcjrix4.png"
+    "https://res.cloudinary.com/dc9htgupc/image/upload/c_fill,h_200,w_200/v1636321298/y7ig5h9stnxi2zcjrix4.png"
   );
   const [errors, setErrors] = useState({});
 
@@ -54,7 +53,8 @@ function SignupForm() {
     })
       .then((res) => res.json())
       .then((data) => {
-        setProfile_image(data.url);
+        let split = data.url.split("upload");
+        setProfile_image(`${split[0]}upload/c_fill,h_200,w_200${split[1]}`);
       })
       .catch((err) => console.log(err));
   };

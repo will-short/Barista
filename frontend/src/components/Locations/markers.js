@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import "./Locations.css";
-import GoogleMapReact from "google-map-react";
 import "./markers.css";
 import CheckinFormModal from "../CheckinFormModal";
 
 export default function Marker({ name, vicinity, photos }) {
   const [show, setShow] = useState(true);
   let photoRef = photos ? photos[0].photo_reference : null;
+  const sessionUser = useSelector((state) => state.session.user);
   return (
     <div id="markerWrapper">
       <div id="marker" onClick={show && (() => setShow(!show))}>
@@ -22,7 +22,7 @@ export default function Marker({ name, vicinity, photos }) {
               onClick={() => setShow(!show)}
             />
             <span onClick={() => setShow(!show)}>Location: {vicinity}</span>
-            <CheckinFormModal location={name} />
+            {sessionUser && <CheckinFormModal location={name} />}
           </>
         )}
       </div>

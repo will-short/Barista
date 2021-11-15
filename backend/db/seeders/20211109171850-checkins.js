@@ -10,6 +10,7 @@ module.exports = {
         rating: 4.5,
         drink_id: 2,
         owner_id: 2,
+        location: "starbucks",
       },
       {
         description: "Wow this looks amazing",
@@ -18,6 +19,7 @@ module.exports = {
         rating: 3,
         drink_id: 5,
         owner_id: 2,
+        location: "dennys",
       },
       {
         description: "having a great time!",
@@ -26,6 +28,7 @@ module.exports = {
         rating: 5,
         drink_id: 2,
         owner_id: 3,
+        location: "coffe shop",
       },
       {
         description: "yummm",

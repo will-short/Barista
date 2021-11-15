@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Modal } from "../../context/Modal";
 import CheckinForm from "./CheckinForm";
-import { useDispatch, useSelector } from "react-redux";
 
 export default function CheckinFormModal({
   drinkImg,

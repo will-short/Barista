@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import logo from "../../images/Barista-logo-text.png";
 
 function LoginForm() {

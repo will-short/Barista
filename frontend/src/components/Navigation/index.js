@@ -5,11 +5,9 @@ import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import * as sessionActions from "../../store/session";
-import { getAllDrinks } from "../../store/drinks";
 import DrinkModal from "../DrinkModal";
 import "./Navigation.css";
 import logo from "../../images/Barista-logo-text.png";
-import { getAllLocations } from "../../store/locations";
 
 let searchDiv;
 
@@ -72,7 +70,7 @@ function Navigation({ isLoaded }) {
         <div className="search">
           <input
             type="search"
-            placeholder="Find a Drink or Location"
+            placeholder="Find a Drink"
             id="searchBar"
             onFocus={drinkList}
             onChange={filter}

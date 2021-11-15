@@ -107,4 +107,5 @@ button:hover {
 }
 a#locations {
   width: fit-content;
+  margin-top: 5px;
 }

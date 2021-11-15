@@ -6,7 +6,7 @@ const load = (locations) => ({
 });
 //https://maps.googleapis.com/maps/api/place/textsearch/json
 export const getAllLocations = (lat, lng) => async (dispatch) => {
-  const response = await fetch(`/api/locations/${lat},${lng}`);
+  const response = await csrfFetch(`/api/locations/${lat},${lng}`);
   const locations = await response.json();
   dispatch(load(locations));
   return locations;

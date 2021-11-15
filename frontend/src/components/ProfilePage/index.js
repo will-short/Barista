@@ -1,9 +1,7 @@
 import "./ProfilePage.css";
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import * as sessionActions from "../../store/session";
-import logo from "../../images/Barista-logo-text.png";
+import React from "react";
+import { useSelector } from "react-redux";
+
 import CheckinFeed from "../CheckinFeed";
 
 export default function ProfilePage() {
@@ -16,7 +14,6 @@ export default function ProfilePage() {
   const userComments = Object.values(checkins).filter(({ Comments }) =>
     Comments?.some(({ owner_id }) => owner_id === id)
   );
-  // console.log(userComments);
   return (
     <div id="profileMain">
       <div id="profileHeader">
