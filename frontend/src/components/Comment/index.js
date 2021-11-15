@@ -15,7 +15,6 @@ export default function Comment({ data }) {
   if (sessionUser?.id !== User?.id)
     return (
       <li>
-        {console.log(User)}
         <img
           src={User.profile_image ? User.profile_image : defaultProfileImg}
           alt=""

@@ -7,6 +7,7 @@ import * as sessionActions from "./store/session";
 import Locations from "./components/Locations";
 import { getAllDrinks } from "./store/drinks";
 import ProfilePage from "./components/ProfilePage";
+import { getAllCheckins } from "./store/checkins";
 
 function App() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     dispatch(getAllDrinks());
+    dispatch(getAllCheckins());
     navigator.geolocation.getCurrentPosition((loca) => {
       setLocation({
         loaded: true,

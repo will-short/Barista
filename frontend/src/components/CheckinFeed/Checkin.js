@@ -7,6 +7,7 @@ import {
 } from "../../store/checkins";
 import CommentForm from "../CommentForm";
 import Comment from "../Comment";
+import { useLocation } from "react-router-dom";
 
 export default function Checkin({ data }) {
   let {
@@ -24,6 +25,7 @@ export default function Checkin({ data }) {
 
   const [updateDisc, setUpdateDisc] = useState(description);
   const dispatch = useDispatch();
+  const location = useLocation();
   const defaultProfileImg =
     "https://res.cloudinary.com/dc9htgupc/image/upload/v1636321298/y7ig5h9stnxi2zcjrix4.png";
   const sessionUser = useSelector((state) => state.session.user);
@@ -34,7 +36,17 @@ export default function Checkin({ data }) {
     dispatch(editCheckin(id, update));
   }
   useSelector((state) => state.checkins);
+  let url = location.pathname;
+  let isProfile = url.endsWith("profile");
 
+  let selfComments = Comments.filter(
+    ({ owner_id }) => +owner_id === +sessionUser.id
+  );
+  let otherComments = Comments.filter(
+    ({ owner_id }) => +owner_id !== +sessionUser.id
+  ).reverse();
+  let formattedComments = [...selfComments, ...otherComments];
+  console.log(selfComments);
   function stars(rating) {
     let stars = [];
     for (let i = 0; i < 5; i++) {
@@ -48,6 +60,7 @@ export default function Checkin({ data }) {
     }
     return stars;
   }
+
   return (
     <li>
       <div className="top">
@@ -63,7 +76,7 @@ export default function Checkin({ data }) {
         </h3>
         <div className="starRating">{stars(+rating)}</div>
       </div>
-      {sessionUser?.id === owner_id ? (
+      {sessionUser?.id === owner_id && isProfile ? (
         <div id="descriptionDiv">
           <input
             type="text"
@@ -84,25 +97,24 @@ export default function Checkin({ data }) {
         <div id="descriptionDiv">{description}</div>
       )}
       <img src={image} alt="" className="checkinImage" />
-      <div className="checkinMain">
-        <div>
-          {sessionUser?.id === owner_id && (
-            <button
-              className="deleteButton"
-              onClick={() => deleteCheckinAction(id)}
-            >
-              Delete Checkin
-            </button>
-          )}
-        </div>
-      </div>
+
       <h3 id="commentHeader">Comments</h3>
       <ul id="commentContainer">
-        {Comments?.reverse().map(({ id, content, User }) => (
+        {formattedComments.map(({ id, content, User }) => (
           <Comment key={id} data={{ id, content, User }} />
         ))}
       </ul>
       <CommentForm checkinId={id} />
+      {sessionUser?.id === owner_id && isProfile && (
+        <div id="deleteContainer">
+          <button
+            className="deleteButton"
+            onClick={() => deleteCheckinAction(id)}
+          >
+            Delete Checkin
+          </button>
+        </div>
+      )}
     </li>
   );
 }

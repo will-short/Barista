@@ -1,6 +1,6 @@
 main {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 500px 330px;
   grid-column-gap: 100px;
   height: calc(100vh - 150px);
   width: 70vw;
@@ -32,7 +32,7 @@ h2 {
 }
 .checkin-feed {
   margin-top: 50px;
-  width: 40vw;
+  width: 500px;
   height: 80%;
 }
 .checkin-feed > h2 {

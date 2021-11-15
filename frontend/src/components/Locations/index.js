@@ -27,7 +27,6 @@ export default function Locations({ location }) {
           defaultCenter={location.coordinates}
           center={location.coordinates}
           defaultZoom={zoom}
-          onCenterChanged={(e) => console.log("works!!!!!!")}
         >
           {locations?.map(
             ({ geometry, name, formatted_address, photos }, index) => (

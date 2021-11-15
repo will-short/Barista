@@ -6,6 +6,8 @@ import CheckinFeed from "../CheckinFeed";
 
 export default function HomePage() {
   const sessionUser = useSelector((state) => state.session.user);
+  const checkins = useSelector((state) => state.checkins);
+
   let sideBar;
   if (sessionUser) {
     sideBar = <UserInfo />;
@@ -24,7 +26,19 @@ export default function HomePage() {
     <main>
       <div className="checkin-feed">
         <h2>Recent Activity</h2>
-        <CheckinFeed />
+        <div className="checkinFeedContainer">
+          <div className="checkinHeader">
+            <label htmlFor="all">
+              <input type="radio" name="header" id="all" />
+              <span>Latest Checkins</span>
+            </label>
+            <label htmlFor="yours">
+              <input type="radio" name="header" id="yours" checked />
+              <span>Your Checkins</span>
+            </label>
+          </div>
+          <CheckinFeed checkins={checkins} />
+        </div>
       </div>
       <aside>{sideBar}</aside>
     </main>
