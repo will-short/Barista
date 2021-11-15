@@ -118,13 +118,15 @@ export default function Checkin({ data }) {
           <Comment key={id} data={{ id, content, User }} />
         ))}
       </ul>
-      <h4
-        onClick={() => {
-          setExpand(!expand);
-        }}
-      >
-        {expand ? "Colapse" : "Expand"}
-      </h4>
+      {formattedComments.length && (
+        <h4
+          onClick={() => {
+            setExpand(!expand);
+          }}
+        >
+          {expand ? "Colapse" : "Expand"}
+        </h4>
+      )}
       <CommentForm checkinId={id} />
       {sessionUser?.id === owner_id && isProfile && (
         <div id="deleteContainer">

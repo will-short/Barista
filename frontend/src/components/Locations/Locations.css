@@ -7,7 +7,6 @@ div#mapWrapper {
   height: 80%;
 }
 div#locations {
-  width: 95%;
   height: calc(100% - 90px);
   display: grid;
   place-items: center;
