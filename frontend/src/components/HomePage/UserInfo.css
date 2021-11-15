@@ -5,6 +5,7 @@
 .user-image > img {
   height: 60px;
   width: 60px;
+  border-radius: 50%;
 }
 
 h2 {
