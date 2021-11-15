@@ -119,10 +119,9 @@ ul#commentContainer {
   list-style-type: none;
   padding-inline-start: 0px;
   display: grid;
-  height: 110px;
   row-gap: 10px;
-  overflow-y: scroll;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 ul#commentContainer > li {
   display: flex;
@@ -137,4 +136,8 @@ div#deleteContainer {
   width: 100%;
   display: flex;
   justify-content: center;
+}
+h4 {
+  cursor: pointer;
+  margin-left: 90px;
 }

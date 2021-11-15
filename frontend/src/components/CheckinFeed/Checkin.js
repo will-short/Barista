@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCheckin, editCheckin } from "../../store/checkins";
 import CommentForm from "../CommentForm";
@@ -19,6 +19,15 @@ export default function Checkin({ data }) {
   } = data;
 
   const [updateDisc, setUpdateDisc] = useState(description);
+  const [expand, setExpand] = useState(false);
+  let height = { height: "110px" };
+  useEffect(() => {
+    if (expand) {
+      height = { height: "fit-content" };
+    } else {
+      height = { height: "110px" };
+    }
+  }, [expand]);
   const dispatch = useDispatch();
   const location = useLocation();
   const sessionUser = useSelector((state) => state.session.user);
@@ -101,12 +110,21 @@ export default function Checkin({ data }) {
       )}
       <img src={image} alt="" className="checkinImage" />
 
-      <h3 id="commentHeader">Comments</h3>
-      <ul id="commentContainer">
+      <ul
+        id="commentContainer"
+        style={expand ? { height: "fit-content" } : { height: "110px" }}
+      >
         {formattedComments.map(({ id, content, User }) => (
           <Comment key={id} data={{ id, content, User }} />
         ))}
       </ul>
+      <h4
+        onClick={() => {
+          setExpand(!expand);
+        }}
+      >
+        {expand ? "Colapse" : "Expand"}
+      </h4>
       <CommentForm checkinId={id} />
       {sessionUser?.id === owner_id && isProfile && (
         <div id="deleteContainer">
