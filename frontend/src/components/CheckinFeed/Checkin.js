@@ -124,7 +124,7 @@ export default function Checkin({ data }) {
             setExpand(!expand);
           }}
         >
-          {expand ? "Colapse" : "Expand"}
+          {expand ? "Collapse" : "Expand"}
         </h4>
       )}
       <CommentForm checkinId={id} />
