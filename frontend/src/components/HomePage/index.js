@@ -36,7 +36,7 @@ export default function HomePage({ location }) {
   return (
     <main>
       <div className="checkin-feed">
-        <h2>Recent Activity</h2>
+        <h2 className="pop">Recent Activity</h2>
         <div className="checkinFeedContainer">
           <CheckinFeed checkins={checkins} />
         </div>

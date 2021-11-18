@@ -22,6 +22,12 @@ form.comment {
   grid-template-columns: auto;
   grid-template-rows: auto;
 }
+div#root h1,
+div#root h2,
+div#root h3,
+div#descriptionDiv {
+  color: #01627f;
+}
 @media screen and (max-width: 500px) {
   div#root {
     width: 100vw;
