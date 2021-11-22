@@ -42,7 +42,6 @@ div#profile-container {
   border-top: 1px solid black;
 }
 a {
-  height: 35px;
   width: calc(100% - 60px);
   padding-left: 10px;
   padding-right: 50px;

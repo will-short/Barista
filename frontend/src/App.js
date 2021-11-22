@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./components/HomePage";
-import Navigation from "./components/Navigation";
 import * as sessionActions from "./store/session";
 import Locations from "./components/Locations";
 import { getAllDrinks } from "./store/drinks";
@@ -16,14 +15,14 @@ function App() {
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     dispatch(getAllDrinks());
+
     navigator.geolocation.getCurrentPosition((loca) => {
-      setLocation({
-        loaded: true,
-        coordinates: {
+      dispatch(
+        sessionActions.getLocation({
           lat: +loca.coords.latitude,
           lng: +loca.coords.longitude,
-        },
-      });
+        })
+      );
     });
 
     dispatch(getAllCheckins());
@@ -31,14 +30,14 @@ function App() {
 
   return (
     <>
-      <Navigation isLoaded={isLoaded} />
+      {/* <Navigation isLoaded={isLoaded} /> */}
       {isLoaded && (
         <Switch>
           <Route exact path="/">
-            <HomePage location={location} />
+            <HomePage />
           </Route>
           <Route path="/locations">
-            <Locations location={location} />
+            <Locations />
           </Route>
           <Route path="/profile">
             <ProfilePage />

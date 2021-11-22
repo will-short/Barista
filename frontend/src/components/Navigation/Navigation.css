@@ -78,20 +78,6 @@ div.search {
   padding-bottom: 5px;
   height: 60px;
 }
-::-webkit-scrollbar {
-  width: 15px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: grey;
-  border-radius: 10px;
-}
-/* Track */
-::-webkit-scrollbar-track {
-  border-radius: 10px;
-  width: 5px;
-}
 
 button:hover {
   background-color: rgb(233, 233, 233);
