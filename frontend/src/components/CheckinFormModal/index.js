@@ -16,7 +16,6 @@ export default function CheckinFormModal({
       <button
         onClick={() => {
           setShowModal(true);
-          searchDiv.lastChild.style.display = "none";
         }}
       >
         Checkin

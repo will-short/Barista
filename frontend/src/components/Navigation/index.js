@@ -78,10 +78,7 @@ function Navigation({ isLoaded }) {
 
           <div className="drinks-list" style={{ display: "none" }}>
             {drinks.map(({ name, image, id }) => {
-              if (name?.toLowerCase().startsWith(search) || !search)
-                return (
-                  <DrinkModal key={id} name={name} image={image} drinkId={id} />
-                );
+              if (name?.toLowerCase().startsWith(search) || !search) return; // <DrinkModal key={id} name={name} image={image} drinkId={id} />
             })}
           </div>
         </div>
