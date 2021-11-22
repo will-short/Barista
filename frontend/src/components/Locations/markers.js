@@ -17,7 +17,7 @@ export default function Marker({ name, vicinity, photos }) {
           <>
             <span onClick={() => setShow(!show)}>{name}</span>
             <img
-              src={`https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoRef}&key=AIzaSyBynTKh6jKkL6pn5gHvhOIgFjHUXLvVfAA`}
+              src={`https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=${photoRef}&key=AIzaSyBynTKh6jKkL6pn5gHvhOIgFjHUXLvVfAA`}
               alt=""
               onClick={() => setShow(!show)}
             />
@@ -29,3 +29,5 @@ export default function Marker({ name, vicinity, photos }) {
     </div>
   );
 }
+
+// https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoRef}&key=AIzaSyBynTKh6jKkL6pn5gHvhOIgFjHUXLvVfAA
