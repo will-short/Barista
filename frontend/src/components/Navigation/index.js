@@ -5,7 +5,7 @@ import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import * as sessionActions from "../../store/session";
-import DrinkModal from "../DrinkModal";
+// import DrinkModal from "../DrinkModal";
 import "./Navigation.css";
 import logo from "../../images/Barista-logo-text.png";
 

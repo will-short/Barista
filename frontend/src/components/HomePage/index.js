@@ -5,7 +5,10 @@ import UserInfo from "./UserInfo";
 import CheckinFeed from "../CheckinFeed";
 import { getAllLocations } from "../../store/locations";
 import logo from "../../images/logo-text-nobg.png";
-import { NavLink } from "react-router-dom";
+import { Route, Switch, NavLink } from "react-router-dom";
+import Locations from "../Locations";
+import ProfilePage from "../ProfilePage";
+import DrinksPage from "../DrinksPage";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -36,12 +39,25 @@ export default function HomePage() {
   }
   return (
     <main>
-      <div className="checkin-feed">
-        <h2 className="pop">Recent Activity</h2>
-        <div className="checkinFeedContainer">
-          <CheckinFeed checkins={checkins} />
-        </div>
-      </div>
+      <Switch>
+        <Route exact path="/">
+          <div className="checkin-feed">
+            <h2 className="pop">Recent Activity</h2>
+            <div className="checkinFeedContainer">
+              <CheckinFeed checkins={checkins} />
+            </div>
+          </div>
+        </Route>
+        <Route path="/locations">
+          <Locations />
+        </Route>
+        <Route path="/drinks">
+          <DrinksPage />
+        </Route>
+        <Route path="/profile">
+          <ProfilePage />
+        </Route>
+      </Switch>
       <aside>
         <NavLink exact to="/" className="home">
           <img src={logo} alt="" />

@@ -28,7 +28,7 @@ export default function UserInfo() {
           {location}
         </div>
       </NavLink>
-      <NavLink to="/" className="card drinks">
+      <NavLink to="/drinks" className="card drinks">
         <h2>Drinks</h2>
       </NavLink>
       <NavLink to="/locations" className="card locations">

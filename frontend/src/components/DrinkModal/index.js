@@ -5,16 +5,21 @@ import Drink from "./Drink";
 export default function DrinkModal({ image, name, drinkId }) {
   const [showModal, setShowModal] = useState(false);
   const searchDiv = document.querySelector(".search");
-
+  const background = {
+    "background-image": `url('${image}')`,
+    "background-size": "cover",
+    "background-repeat": "no-repeat",
+    "background-position": "center",
+  };
   return (
     <>
       <button
         onClick={() => {
           setShowModal(true);
-          searchDiv.lastChild.style.display = "none";
         }}
+        className="drink-button"
+        style={background}
       >
-        <img src={image} alt="" />
         <div>{name}</div>
       </button>
       {showModal && (

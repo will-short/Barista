@@ -10,7 +10,6 @@ import { getAllCheckins } from "./store/checkins";
 
 function App() {
   const dispatch = useDispatch();
-  const [location, setLocation] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
@@ -28,24 +27,7 @@ function App() {
     dispatch(getAllCheckins());
   }, [dispatch]);
 
-  return (
-    <>
-      {/* <Navigation isLoaded={isLoaded} /> */}
-      {isLoaded && (
-        <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route path="/locations">
-            <Locations />
-          </Route>
-          <Route path="/profile">
-            <ProfilePage />
-          </Route>
-        </Switch>
-      )}
-    </>
-  );
+  return <>{isLoaded && <HomePage />}</>;
 }
 
 export default App;
