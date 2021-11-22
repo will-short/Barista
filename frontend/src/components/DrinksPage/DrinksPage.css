@@ -16,3 +16,8 @@ button.drink-button {
   font-size: 25px;
   text-shadow: -1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;
 }
+button.drink-button:focus-visible,
+button.drink-button:hover {
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}

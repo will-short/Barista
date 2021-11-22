@@ -9,6 +9,9 @@ import { Route, Switch, NavLink } from "react-router-dom";
 import Locations from "../Locations";
 import ProfilePage from "../ProfilePage";
 import DrinksPage from "../DrinksPage";
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
+import * as sessionActions from "../../store/session";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -34,6 +37,21 @@ export default function HomePage() {
           If you want to explore without creating a account click on the Demo
           User button!
         </h3>
+        <LoginFormModal />
+        <SignupFormModal />
+        <button
+          className="user"
+          onClick={() =>
+            dispatch(
+              sessionActions.login({
+                credential: "Demo-lition",
+                password: "password",
+              })
+            )
+          }
+        >
+          Demo User
+        </button>
       </article>
     );
   }
