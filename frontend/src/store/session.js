@@ -58,6 +58,23 @@ export const restoreUser = () => async (dispatch) => {
   return response;
 };
 
+export const uploadImage = (image) => async (dispatch) => {
+  const data = new FormData();
+  data.append("file", image);
+  data.append("upload_preset", "ubllb9oo");
+  data.append("cloud_name", "dc9htgupc");
+  const response = await fetch(
+    "https://api.cloudinary.com/v1_1/dc9htgupc/image/upload",
+    {
+      method: "POST",
+      body: data,
+    }
+  );
+  const resData = await response.json();
+  let split = resData.url.split("upload");
+  return `${split[0]}upload/c_fill,h_200,w_200${split[1]}`;
+};
+
 const sessionReducer = (state = { user: null }, action) => {
   let newState;
   switch (action.type) {
