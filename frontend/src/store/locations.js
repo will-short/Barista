@@ -4,7 +4,8 @@ const load = (locations) => ({
   type: LOADLOCATIONS,
   locations,
 });
-export const getAllLocations = (lat, lng) => async (dispatch) => {
+export const getAllLocations = (data) => async (dispatch) => {
+  let { lat, lng } = data;
   const response = await csrfFetch(`/api/locations/${lat},${lng}`);
   const locations = await response.json();
   dispatch(load(locations));

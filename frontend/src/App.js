@@ -13,14 +13,7 @@ function App() {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
     dispatch(getAllDrinks());
 
-    navigator.geolocation.getCurrentPosition((loca) => {
-      dispatch(
-        sessionActions.getLocation({
-          lat: +loca.coords.latitude,
-          lng: +loca.coords.longitude,
-        })
-      );
-    });
+    dispatch(sessionActions.getLocation());
     dispatch(getAllCheckins());
   }, [dispatch]);
 

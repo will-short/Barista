@@ -8,6 +8,7 @@ router.get(
   "/:data",
   asyncHandler(async (req, res) => {
     const data = req.params.data;
+    console.log(data);
     const config = {
       method: "get",
       url: `https://maps.googleapis.com/maps/api/place/textsearch/json?query=coffee+shop&type=cafe&location=${data}&radius=3000&region=us&key=AIzaSyBynTKh6jKkL6pn5gHvhOIgFjHUXLvVfAA`,
