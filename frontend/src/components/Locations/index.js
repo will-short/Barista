@@ -24,6 +24,8 @@ export default function Locations() {
       </h1>
     );
   }
+  console.log(sessionCoords);
+  console.log(locations);
   return (
     <div id="locations">
       <div id="mapWrapper">
