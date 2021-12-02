@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Locations.css";
 import GoogleMapReact from "google-map-react";
@@ -11,9 +11,9 @@ export default function Locations() {
   let locations = useSelector((state) => state.locations);
   const sessionCoords = useSelector((state) => state.session.coords);
 
-  if (locations < 1) {
+  useEffect(() => {
     dispatch(getAllLocations(sessionCoords));
-  }
+  }, [dispatch]);
 
   const zoom = 12;
   if (!sessionCoords) {
@@ -24,7 +24,6 @@ export default function Locations() {
       </h1>
     );
   }
-  console.log(locations);
   return (
     <div id="locations">
       <div id="mapWrapper">
