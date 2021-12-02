@@ -57,6 +57,12 @@ export default function HomePage() {
   }
   return (
     <main>
+      <aside>
+        <NavLink exact to="/" className="home">
+          <img src={logo} alt="" />
+        </NavLink>
+        {sideBar}
+      </aside>
       <Switch>
         <Route exact path="/">
           <div className="checkin-feed">
@@ -76,12 +82,6 @@ export default function HomePage() {
           <ProfilePage />
         </Route>
       </Switch>
-      <aside>
-        <NavLink exact to="/" className="home">
-          <img src={logo} alt="" />
-        </NavLink>
-        {sideBar}
-      </aside>
     </main>
   );
 }
