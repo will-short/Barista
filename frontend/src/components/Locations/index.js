@@ -24,7 +24,7 @@ export default function Locations() {
       </h1>
     );
   }
-
+  console.log(locations);
   return (
     <div id="locations">
       <div id="mapWrapper">
@@ -36,7 +36,7 @@ export default function Locations() {
           center={sessionCoords}
           defaultZoom={zoom}
         >
-          {locations?.map(
+          {locations.map(
             ({ geometry, name, formatted_address, photos }, index) => (
               <Marker
                 key={index}
