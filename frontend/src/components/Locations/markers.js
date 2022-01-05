@@ -29,3 +29,5 @@ export default function Marker({ name, vicinity, photos }) {
     </div>
   );
 }
+
+// https://maps.googleapis.com/maps/api/place/photo?photo_reference=${photoRef}&key=AIzaSyBynTKh6jKkL6pn5gHvhOIgFjHUXLvVfAA

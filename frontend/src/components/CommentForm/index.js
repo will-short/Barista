@@ -23,13 +23,7 @@ export default function CheckinForm({ checkinId }) {
   if (sessionUser) {
     return (
       <div id="commentForm">
-        <h3
-          onClick={() =>
-            showCommentForm
-              ? setShowCommentForm(false)
-              : setShowCommentForm(true)
-          }
-        >
+        <h3 onClick={() => setShowCommentForm(!showCommentForm)}>
           Create Comment
         </h3>
         {showCommentForm && (

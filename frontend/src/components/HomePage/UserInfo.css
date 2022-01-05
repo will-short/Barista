@@ -1,33 +1,56 @@
-.user-image {
-  height: 60px;
+aside a.user-card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 2fr 1fr 1fr;
+  width: 90%;
+  background-color: white;
+  place-items: center;
+  padding: 0.3rem;
 }
 
-.user-image > img {
+.user-image {
+  grid-area: 1 / 1 / 2 / 3;
   height: 60px;
   width: 60px;
   border-radius: 50%;
 }
 
-h2 {
+.user-card > h2 {
+  grid-area: 2 / 1 / 3 / 3;
   margin: 0;
-  margin-left: 3px;
   color: black;
 }
-.sb_user {
-  display: flex;
-  width: 100%;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-.info {
-  margin-left: 10px;
+.user-card > div {
   color: grey;
-}
-.info > div {
   display: flex;
   align-items: center;
 }
-.info > div > i {
+.user-card > div > i {
   color: grey;
   margin-right: 5px;
+}
+aside > .card {
+  width: 90%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  color: white;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 0 1rem;
+}
+.drinks {
+  background-image: url("../../images/pouring-coffee-square.jpg");
+}
+.locations {
+  background-image: url("../../images/baristas-behind-counter-busy-coffee-square.jpg");
+}
+aside > a:focus-visible,
+aside > a:hover {
+  box-shadow: 0 0 1rem white;
+  cursor: pointer;
+}
+aside > button {
+  margin: 0;
 }

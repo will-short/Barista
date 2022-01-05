@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import {} from "../../store/checkins";
 import { useDispatch, useSelector } from "react-redux";
 import { postCheckin } from "../../store/checkins";
+import * as sessionActions from "../../store/session";
+
 import "./CheckinForm.css";
 
 export default function CheckinForm(data) {
@@ -38,21 +40,15 @@ export default function CheckinForm(data) {
   };
 
   const locations = useSelector((state) => state.locations);
-  const uploadImage = (image) => {
-    const data = new FormData();
-    data.append("file", image);
-    data.append("upload_preset", "ubllb9oo");
-    data.append("cloud_name", "dc9htgupc");
-    fetch("https://api.cloudinary.com/v1_1/dc9htgupc/image/upload", {
-      method: "POST",
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setImage(data.url);
-      })
-      .catch((err) => console.log(err));
-  };
+
+  async function imageSubmit(e) {
+    let uploadedImage = await dispatch(
+      sessionActions.uploadImage(e.target.files[0])
+    );
+    setImage(uploadedImage);
+    console.log(uploadedImage);
+  }
+
   let locationNames = [...new Set(locations.map(({ name }) => name))];
   return (
     <>
@@ -100,7 +96,7 @@ export default function CheckinForm(data) {
         <div className="img-container">
           <input
             type="file"
-            onChange={(e) => uploadImage(e.target.files[0])}
+            onChange={imageSubmit}
             id="img"
             style={{ display: "none" }}
           ></input>

@@ -2,6 +2,7 @@ import { csrfFetch } from "./csrf";
 
 const SETUSER = "session/SETUSER";
 const REMOVEUSER = "session/removeUser";
+const SETLOCATION = "session/SETLOCATION";
 
 //set user action
 const setUser = (user) => ({
@@ -15,6 +16,11 @@ const removeUser = () => {
     type: REMOVEUSER,
   };
 };
+
+const setLocation = (location) => ({
+  type: SETLOCATION,
+  location,
+});
 
 //thunk to login a user
 export const login = (user) => async (dispatch) => {
@@ -58,6 +64,36 @@ export const restoreUser = () => async (dispatch) => {
   return response;
 };
 
+//image upload
+export const uploadImage = (image) => async (dispatch) => {
+  const data = new FormData();
+  data.append("file", image);
+  data.append("upload_preset", "ubllb9oo");
+  data.append("cloud_name", "dc9htgupc");
+  const response = await fetch(
+    "https://api.cloudinary.com/v1_1/dc9htgupc/image/upload",
+    {
+      method: "POST",
+      body: data,
+    }
+  );
+  const resData = await response.json();
+  let split = resData.url.split("upload");
+  return `${split[0]}upload/c_fill,h_200,w_200${split[1]}`;
+};
+
+//user geo-location
+export const getLocation = () => async (dispatch) => {
+  navigator.geolocation.getCurrentPosition((loca) => {
+    dispatch(
+      setLocation({
+        lat: +loca.coords.latitude,
+        lng: +loca.coords.longitude,
+      })
+    );
+  });
+};
+
 const sessionReducer = (state = { user: null }, action) => {
   let newState;
   switch (action.type) {
@@ -68,6 +104,10 @@ const sessionReducer = (state = { user: null }, action) => {
     case REMOVEUSER:
       newState = Object.assign({}, state);
       newState.user = null;
+      return newState;
+    case SETLOCATION:
+      newState = Object.assign({}, state);
+      newState.coords = action.location;
       return newState;
     default:
       return state;

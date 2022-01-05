@@ -34,6 +34,9 @@ header > div > h3 {
   justify-content: space-around;
   margin-left: 10px;
 }
+div#modal-content h3.black {
+  color: black;
+}
 h3 > div {
   width: fit-content;
   margin-left: 10px;

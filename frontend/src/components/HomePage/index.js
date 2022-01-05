@@ -4,18 +4,25 @@ import "./HomePage.css";
 import UserInfo from "./UserInfo";
 import CheckinFeed from "../CheckinFeed";
 import { getAllLocations } from "../../store/locations";
+import logo from "../../images/logo-text-nobg.png";
+import { Route, Switch, NavLink } from "react-router-dom";
+import Locations from "../Locations";
+import ProfilePage from "../ProfilePage";
+import DrinksPage from "../DrinksPage";
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
+import * as sessionActions from "../../store/session";
 
-export default function HomePage({ location }) {
+export default function HomePage() {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
+  const sessionCoords = useSelector((state) => state.session.coords);
   const checkins = useSelector((state) => state.checkins);
   const locations = useSelector((state) => state.locations);
 
   useEffect(() => {
-    if (locations < 1 && location.loaded) {
-      dispatch(
-        getAllLocations(location.coordinates.lat, location.coordinates.lng)
-      );
+    if (locations < 1) {
+      dispatch(getAllLocations(sessionCoords));
     }
   }, [dispatch]);
 
@@ -24,24 +31,57 @@ export default function HomePage({ location }) {
     sideBar = <UserInfo />;
   } else {
     sideBar = (
-      <article>
+      <article className="logged-out-info">
         <h2>Welcome to Barista, an Untappd clone.</h2>
         <h3>
           If you want to explore without creating a account click on the Demo
           User button!
         </h3>
+        <LoginFormModal />
+        <SignupFormModal />
+        <button
+          className="user"
+          onClick={() =>
+            dispatch(
+              sessionActions.login({
+                credential: "Demo-lition",
+                password: "password",
+              })
+            )
+          }
+        >
+          Demo User
+        </button>
       </article>
     );
   }
   return (
     <main>
-      <div className="checkin-feed">
-        <h2>Recent Activity</h2>
-        <div className="checkinFeedContainer">
-          <CheckinFeed checkins={checkins} />
-        </div>
-      </div>
-      <aside>{sideBar}</aside>
+      <aside>
+        <NavLink exact to="/" className="home">
+          <img src={logo} alt="" />
+        </NavLink>
+        {sideBar}
+      </aside>
+      <Switch>
+        <Route exact path="/">
+          <div className="checkin-feed">
+            <h2 className="pop">Recent Activity</h2>
+            <div className="checkinFeedContainer">
+              <CheckinFeed checkins={checkins} />
+            </div>
+          </div>
+        </Route>
+        <Route path="/locations">
+          <Locations />
+        </Route>
+        <Route path="/drinks">
+          <DrinksPage />
+        </Route>
+        <Route path="/profile">
+          <ProfilePage />
+        </Route>
+      </Switch>
     </main>
   );
 }

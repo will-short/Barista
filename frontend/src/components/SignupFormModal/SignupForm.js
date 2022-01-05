@@ -42,22 +42,13 @@ function SignupForm() {
     });
   };
 
-  const uploadImage = (image) => {
-    const data = new FormData();
-    data.append("file", image);
-    data.append("upload_preset", "ubllb9oo");
-    data.append("cloud_name", "dc9htgupc");
-    fetch("https://api.cloudinary.com/v1_1/dc9htgupc/image/upload", {
-      method: "POST",
-      body: data,
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        let split = data.url.split("upload");
-        setProfile_image(`${split[0]}upload/c_fill,h_200,w_200${split[1]}`);
-      })
-      .catch((err) => console.log(err));
-  };
+  async function imageSubmit(e) {
+    let uploadedImage = await dispatch(
+      sessionActions.uploadImage(e.target.files[0])
+    );
+    setProfile_image(uploadedImage);
+    console.log(uploadedImage);
+  }
 
   return (
     <form onSubmit={handleSubmit} className="signup">
@@ -66,7 +57,7 @@ function SignupForm() {
         <img src={profile_image} />
         <input
           type="file"
-          onChange={(e) => uploadImage(e.target.files[0])}
+          onChange={imageSubmit}
           id="img"
           style={{ display: "none" }}
         ></input>

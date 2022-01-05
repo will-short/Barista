@@ -5,7 +5,7 @@ import ProfileButton from "./ProfileButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import * as sessionActions from "../../store/session";
-import DrinkModal from "../DrinkModal";
+// import DrinkModal from "../DrinkModal";
 import "./Navigation.css";
 import logo from "../../images/Barista-logo-text.png";
 
@@ -78,10 +78,7 @@ function Navigation({ isLoaded }) {
 
           <div className="drinks-list" style={{ display: "none" }}>
             {drinks.map(({ name, image, id }) => {
-              if (name?.toLowerCase().startsWith(search) || !search)
-                return (
-                  <DrinkModal key={id} name={name} image={image} drinkId={id} />
-                );
+              if (name?.toLowerCase().startsWith(search) || !search) return; // <DrinkModal key={id} name={name} image={image} drinkId={id} />
             })}
           </div>
         </div>

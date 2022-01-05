@@ -4,8 +4,8 @@ const load = (locations) => ({
   type: LOADLOCATIONS,
   locations,
 });
-//https://maps.googleapis.com/maps/api/place/textsearch/json
-export const getAllLocations = (lat, lng) => async (dispatch) => {
+export const getAllLocations = (data) => async (dispatch) => {
+  let { lat, lng } = data;
   const response = await csrfFetch(`/api/locations/${lat},${lng}`);
   const locations = await response.json();
   dispatch(load(locations));
@@ -14,8 +14,6 @@ export const getAllLocations = (lat, lng) => async (dispatch) => {
 export default function locationsReducer(state = [], action) {
   switch (action.type) {
     case LOADLOCATIONS:
-      if (JSON.stringify(state) === JSON.stringify(action.locations))
-        return state;
       return [...action.locations];
     default:
       return state;

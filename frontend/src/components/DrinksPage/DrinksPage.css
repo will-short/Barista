@@ -1,0 +1,23 @@
+div.drinks-container {
+  padding: 2rem 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  overflow-x: scroll;
+}
+
+button.drink-button {
+  border-radius: 0;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  margin: 0;
+  font-weight: bold;
+  font-size: 25px;
+  text-shadow: -1px 0 grey, 0 1px grey, 1px 0 grey, 0 -1px grey;
+}
+button.drink-button:focus-visible,
+button.drink-button:hover {
+  box-shadow: 0 0 1rem rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}

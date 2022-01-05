@@ -15,7 +15,7 @@ export default function Drink({ drinkId, closeDrink }) {
         <img src={image} alt="" />
         <div>
           <h2>{name}</h2>
-          <h3>
+          <h3 className="black">
             Ingredients: <div>{ingredients}</div>
           </h3>
         </div>
