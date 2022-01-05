@@ -1,6 +1,6 @@
 
 # Barista a Untappd clone:
-My goal for this app was to implement elements of untappd's social media functionallity with some outside design influence from other popular social mdia sites.  
+My goal for this app was to implement elements of untappd's social media functionallity with some outside design influence from other popular social media sites.  
 
 ## Live Site: https://barista-project.herokuapp.com/
 
