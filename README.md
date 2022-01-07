@@ -271,6 +271,7 @@ export default function Checkin({ data }) {
 Redux is used to keep a site wide state for the current logged in user and all game listings.  On application start Redux stores all drinks, while this causes initial load time to be longer it allows for a fast experience with drinks after initial load.  
 
 Part of the Redux state tree:
+
 ![image](https://user-images.githubusercontent.com/16979047/148470314-59e91268-12bf-4a87-a9ac-2bb93dc8d5a4.png)
 
 Redux uses Thunks to communicate to the backend and then change state with an Action based on the response
