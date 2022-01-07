@@ -12,7 +12,7 @@
 
 <a name="overview"></a>
 # Barista overview
-Barista is a fullstack web-app using [React](https://reactjs.org/), [React-Redux](https://react-redux.js.org/), [Node/Express](https://expressjs.com/) and [PostgreSQL](https://www.postgresql.org/)  
+Barista is a fullstack web-app using [React](https://reactjs.org/), [React-Redux](https://react-redux.js.org/), [Node.js/Express](https://expressjs.com/) and [PostgreSQL](https://www.postgresql.org/)  
 
 Barista is an Untapped clone where users are able to see local coffee shops and post about drinks they are having.
 
@@ -45,124 +45,74 @@ Users are able to:
 
 ### Database ([PostgreSQL](https://www.postgresql.org/))
 
-The database for this app was set up to communicate with the server to store data for persistance between sessions and to serve back that data for games, listings and user cart details
+The database for this app was set up to communicate with the server to store data for persistance between sessions and to serve back that data for Checkins, Drinks and Comments details
 
-<img src="https://user-images.githubusercontent.com/16979047/147774740-c2ca0e19-bd46-41fc-ae39-0c7145e68573.png"
+<img src="https://res.cloudinary.com/dc9htgupc/image/upload/v1636975264/samples/r0tsl4rm9wmschhl41zu.png"
   alt="Database Scheme"/>
   
-SQLAlchemy was used to create models to easily store and harvest data from the database.
+Sequelize was used to create models to easily store and harvest data from the database.
 
 Game listing model:
-```python
-# in /app/models/listing.py
-class Listing(db.Model):
-    __tablename__ = 'listings'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    video_url = db.Column(db.String(255), nullable=True)
-    image_urls = db.Column(db.Text(), nullable=False)
-    description = db.Column(db.String(500), nullable=True)
-    price = db.Column(db.Numeric(6, 2), nullable=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey(
-        'users.id'), nullable=False)
-    created_at = db.Column(db.DateTime(), nullable=False,
-                           server_default=func.now())
-    updated_at = db.Column(
-        db.DateTime(), onupdate=func.now(), default=func.now())
-
-    users = db.relationship('User', back_populates='listings')
-    reviews = db.relationship(
-        'Review', back_populates='listings', cascade="all, delete")
-    tags = db.relationship(
-        'Tag', back_populates='listings', cascade="all, delete")
-    cart_owners = db.relationship(
-        "User",
-        secondary='cart_listings',
-        back_populates="listings",
-        overlaps="cart_listings"
-    )
-
-    def owner(self):
-        return self.users.to_dict()
-
-    def listingId(self):
-        return self.id
-
-    def listingInfo(self):
-        return {
-            'name': self.name,
-            'video_url': self.video_url,
-            'image_urls': json.loads(self.image_urls.replace("'", '"')),
-            'description': self.description,
-            "price": str(self.price),
-            'owner_id': self.owner_id,
-        }
-
-    def to_dict(self):
-        reviews = [review.to_dict() for review in self.reviews]
-        return {
-            'id': self.id,
-            'name': self.name,
-            'video_url': self.video_url,
-            'image_urls': json.loads(self.image_urls.replace("'", '"')),
-            'description': self.description,
-            "price": str(self.price),
-            'owner_id': self.owner_id,
-            'owner': self.users.info(),
-            'tags': self.tags[0].to_list() if self.tags else [],
-            'reviews': reviews,
-            'created_at': self.created_at.strftime('%m/%d/%Y %H:%M:%S'),
-            'updated_at': self.updated_at.strftime('%m/%d/%Y %H:%M:%S')
-        }
-
-
+```js
+// in /backend/db/models/checkin.js
+module.exports = (sequelize, DataTypes) => {
+  const Checkin = sequelize.define(
+    "Checkin",
+    {
+      description: DataTypes.STRING,
+      image: DataTypes.STRING,
+      rating: DataTypes.NUMERIC,
+      drink_id: DataTypes.INTEGER,
+      location: DataTypes.STRING,
+      owner_id: DataTypes.INTEGER,
+    },
+    {}
+  );
+  Checkin.associate = function (models) {
+    Checkin.belongsTo(models.Drink, { foreignKey: "drink_id" });
+    Checkin.belongsTo(models.User, { foreignKey: "owner_id" });
+    Checkin.hasMany(models.Comment, {
+      foreignKey: "checkin_id",
+      onDelete: "cascade",
+      hooks: true,
+    });
+  };
+  Checkin.all = async function (Drink, User, Comment) {
+    const checkins = await Checkin.findAll({
+      include: [Drink, User, { model: Comment, include: User }],
+    });
+    return checkins;
+  };
 ```
   
-### Server ([Python/Flask](https://flask.palletsprojects.com/en/2.0.x/))
+### Server ([Node.js/Express](https://expressjs.com/))
 
-The server for this app was coded using python with Flask to create routes responsible for dataflow between the frontend and the database.  
+The server for this app was coded using Node.js and Express to create routes responsible for dataflow between the frontend and the database.  
 
-Listing `POST` route (images uploaded to and hosted on AWS):
-```python
-# in app/api/listing_routes
-@listing_routes.route('/', methods=['POST'])
-@login_required
-def postListing():
-    form = ListingForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    video = form.data["video"]
-    videoURL = None
-    if video:
-        video.filename = get_unique_filename(video.filename)
-        videoupload = upload_file_to_s3(video)
-        videoURL = videoupload["url"]
+Checkin `POST` route:
+```js
+// in backend/routes/api/checkins.js
+router.post(
+  "/",
+  checkCheckin,
+  asyncHandler(async (req, res) => {
+    let { rating, description, drinkId, image, ownerId, location } = req.body;
+    let checkin = await Checkin.makeNewCheckin(
+      {
+        rating: +rating,
+        description,
+        drink_id: drinkId,
+        image,
+        owner_id: ownerId,
+        location,
+      },
+      Drink,
+      User
+    );
 
-    uploads = [form.data["image1"], form.data["image2"],
-               form.data["image3"], form.data["image4"], form.data["image5"]]
-    imageURLs = []
-    for upload in uploads:
-        if upload:
-            upload.filename = get_unique_filename(upload.filename)
-            imageupload = upload_file_to_s3(upload)
-            imageURLs.append(imageupload["url"])
-    listing = Listing(
-        name=form.data["name"],
-        description=form.data["description"],
-        video_url=videoURL,
-        image_urls=json.dumps(imageURLs),
-        price=form.data["price"],
-        owner_id=current_user.id
-    )
-    db.session.add(listing)
-    db.session.commit()
-    tagsList = json.loads(form.data["tags"])
-    tags = Tag(
-        **tagsList,
-        listing_id=listing.listingId()
-    )
-    db.session.add(tags)
-    db.session.commit()
-    return listing.to_dict()
+    res.json(checkin);
+  })
+);
 ```
 
 <a name="frontend"></a>
@@ -171,47 +121,149 @@ def postListing():
 
 ## React ([React](https://reactjs.org/))
 
-The front end of Indie-Go is all based in react.  React is one of the most popular JS frameworks for full stack aplications.  Using React Components with Redux state Indie-Go serves all the data from the backend to be viewed by the user.
+The front end of Barista is all based in react.  React is one of the most popular JS frameworks for full stack aplications.  Using React Components with Redux state Barista serves all the data from the backend to be viewed by the user.
 
-User info component:
-![image](https://user-images.githubusercontent.com/16979047/147793368-e5547d32-2af2-4fd3-b162-2b77dbcb2770.png)
+Checkin component:
+
+![image](https://user-images.githubusercontent.com/16979047/148469876-9515f3e7-fd91-4dec-88dc-bd0eaab2925d.png)
 ```js
-// in react-app/src/components/User/index.js
-function User({ user }) {
-  const session = useSelector((state) => state.session);
+// in frontend/src/components/CheckinFeed/Checkin.js
+export default function Checkin({ data }) {
+  let {
+    description,
+    checkinLocation,
+    image,
+    rating,
+    owner_id,
+    id,
+    Drink,
+    User,
+    Comments,
+  } = data;
 
-  if (!user) {
-    return null;
+  const [updateDisc, setUpdateDisc] = useState(description);
+  const [expand, setExpand] = useState(false);
+  let height = { height: "110px" };
+  useEffect(() => {
+    if (expand) {
+      height = { height: "fit-content" };
+    } else {
+      height = { height: "110px" };
+    }
+  }, [expand]);
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const sessionUser = useSelector((state) => state.session.user);
+  async function deleteCheckinAction(id) {
+    await dispatch(deleteCheckin(id));
   }
-  let listings = user?.listings;
-  let tags = new Set(listings?.flatMap((listing) => listing.tags));
+  function updateCheckin(update) {
+    dispatch(editCheckin(id, update));
+  }
+  useSelector((state) => state.checkins);
+  let url = location.pathname;
+  let isProfile = url.endsWith("profile");
+
+  let formattedComments = [];
+  if (sessionUser) {
+    let selfComments = Comments?.filter(
+      ({ owner_id }) => +owner_id === +sessionUser.id
+    );
+    let otherComments = Comments?.filter(
+      ({ owner_id }) => +owner_id !== +sessionUser.id
+    ).reverse();
+    if (selfComments) formattedComments = [...selfComments];
+    if (otherComments)
+      formattedComments = [...formattedComments, ...otherComments];
+  } else {
+    formattedComments = Comments?.reverse();
+  }
+  function stars(rating) {
+    let stars = [];
+    for (let i = 0; i < 5; i++) {
+      if (rating - i !== 0.5 && rating - i > 0) {
+        stars.push(<span className="material-icons">star</span>);
+      } else if (rating - i === 0.5) {
+        stars.push(<span className="material-icons">star_half</span>);
+      } else {
+        stars.push(<span class="material-icons">star_border</span>);
+      }
+    }
+    return stars;
+  }
+
   return (
-    <div className={style.container}>
-      <img src={user?.image_url} alt="" />
-      <span>
-        <strong>{user?.username}</strong>
-      </span>
-      <span>
-        Games listed: <strong>{listings?.length}</strong>, Reviews posted:
-        <strong>{user?.reviews?.length}</strong>
-      </span>
-      <span>tags:</span>
-      <div className={style.tags}>
-        {[...tags].map((tag, i) => (
-          <span key={i} className={"tags " + tag}>
-            {tag}
-          </span>
-        ))}
+    <li>
+      <div className="top">
+        <img src={User?.profile_image} alt="" className="profileImage" />
+        <div id="h3s">
+          <h3>
+            {User?.name ? User?.name : User?.username}
+            <span>is drinking a</span>
+            {Drink?.name}
+          </h3>
+          {checkinLocation && (
+            <h3>
+              <span>at</span>
+              {checkinLocation}
+            </h3>
+          )}
+        </div>
+        <div className="starRating">{stars(+rating)}</div>
       </div>
-      {session?.user?.id === +user?.id && (
-        <Link className="primary-link" to={`/users/${user.id}/listings/new/1`}>
-          New Listing
-        </Link>
+      {sessionUser?.id === owner_id && isProfile ? (
+        <div id="descriptionDiv">
+          <input
+            type="text"
+            name="description"
+            id="descriptionfield"
+            value={updateDisc || description}
+            onChange={(e) => setUpdateDisc(e.target.value)}
+          />
+          <button
+            className="update"
+            onClick={(e) => updateCheckin(updateDisc)}
+            disabled={description === updateDisc}
+          >
+            update
+          </button>
+        </div>
+      ) : (
+        <div id="descriptionDiv">{description}</div>
       )}
-    </div>
+      <img src={image} alt="" className="checkinImage" />
+
+      <ul
+        id="commentContainer"
+        style={expand ? { height: "fit-content" } : { height: "110px" }}
+      >
+        {formattedComments.map(({ id, content, User }) => (
+          <Comment key={id} data={{ id, content, User }} />
+        ))}
+      </ul>
+      {formattedComments.length && (
+        <h4
+          onClick={() => {
+            setExpand(!expand);
+          }}
+        >
+          {expand ? "Collapse" : "Expand"}
+        </h4>
+      )}
+      <CommentForm checkinId={id} />
+      {sessionUser?.id === owner_id && isProfile && (
+        <div id="deleteContainer">
+          <button
+            className="deleteButton"
+            onClick={() => deleteCheckinAction(id)}
+          >
+            Delete Checkin
+          </button>
+        </div>
+      )}
+    </li>
   );
 }
-export default User;
 ```
 
 ### Redux Store ([React-Redux](https://react-redux.js.org/))
