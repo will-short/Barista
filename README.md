@@ -268,41 +268,31 @@ export default function Checkin({ data }) {
 
 ### Redux Store ([React-Redux](https://react-redux.js.org/))
 
-Redux is used to keep a site wide state for the current logged in user and all game listings.  On application start Redux stores all listings, while this causes initial load time to be longer it allows for a fast experience with game listings after initial load.  
+Redux is used to keep a site wide state for the current logged in user and all game listings.  On application start Redux stores all drinks, while this causes initial load time to be longer it allows for a fast experience with drinks after initial load.  
 
-Part of the Redux state tree (1 and 2 are game listings):
-![image](https://user-images.githubusercontent.com/16979047/147793185-6ed89a60-953c-4c8d-a6d0-58826d69ec17.png)
+Part of the Redux state tree:
+![image](https://user-images.githubusercontent.com/16979047/148470314-59e91268-12bf-4a87-a9ac-2bb93dc8d5a4.png)
 
 Redux uses Thunks to communicate to the backend and then change state with an Action based on the response
 
 Thunk for `POST` listing:
 ```js
-// in react-app/src/store/listings.js
-export const postListing =
-  (video, images, name, description, price, tags) => async (dispatch) => {
-    const formData = new FormData();
-    if (video) formData.append("video", video);
-    images.map((image, i) =>
-      image ? formData.append(`image${i + 1}`, image) : null
-    );
-    formData.append("name", name);
-    formData.append("description", description);
-    formData.append("tags", JSON.stringify(tags));
-    if (price) formData.append("price", price);
-    const res = await fetch("/api/listings/", {
-      method: "POST",
-      body: formData,
-    });
-
-    const data = await res.json();
-    dispatch(post(data));
-  };
+// in frontend/src/store/checkins.js
+export const postCheckin = (checkin) => async (dispatch) => {
+  const response = await csrfFetch("/api/checkins", {
+    method: "POST",
+    body: JSON.stringify(checkin),
+  });
+  let newCheckin = await response.json();
+  dispatch(add(newCheckin));
+  return newCheckin;
+};
 ```
 Action dispatched with data from the response from server:
 ```js
-// in react-app/src/store/listings.js
-const post = (listing) => ({
-  type: POST,
-  listing,
+// in frontend/src/store/checkins.js
+const add = (checkin) => ({
+  type: ADDCHECKIN,
+  checkin,
 });
 ```
