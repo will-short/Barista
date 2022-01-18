@@ -3,6 +3,7 @@ import {} from "../../store/checkins";
 import { useDispatch, useSelector } from "react-redux";
 import { postCheckin } from "../../store/checkins";
 import * as sessionActions from "../../store/session";
+import Rating from "@mui/material/Rating";
 
 import "./CheckinForm.css";
 
@@ -109,17 +110,14 @@ export default function CheckinForm(data) {
           </label>
         </div>
         <div className="inputs">
-          <div>
-            <label htmlFor="rating">{rating} Stars</label>
-            <input
-              type="range"
-              min="0"
-              max="10"
-              id="rating"
-              placeholder="enter rating"
-              onChange={(e) => setRating(+e.target.value / 2)}
-            />
-          </div>
+          Rating:
+          <Rating
+            name="rating"
+            value={+rating}
+            onChange={(e) => setRating(e.target.value)}
+            precision={0.5}
+            size="large"
+          />
         </div>
         <button
           type="submit"

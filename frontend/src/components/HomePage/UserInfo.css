@@ -48,7 +48,7 @@ aside > .card {
 }
 aside > a:focus-visible,
 aside > a:hover {
-  box-shadow: 0 0 1rem white;
+  box-shadow: 0 0 2rem rgb(36, 32, 32);
   cursor: pointer;
 }
 aside > button {

@@ -7,7 +7,6 @@ const EDITCHECKIN = "checkins/EDITCHECKIN";
 const POSTCOMMENT = "comment/POSTCOMMENT";
 const DELETECOMMENT = "comment/DELETECOMMENT";
 const EDITCOMMENT = "comment/EDITCOMMENT";
-//TODO: fix everything to not just load all
 const load = (checkins) => ({
   type: LOADCHECKINS,
   checkins,

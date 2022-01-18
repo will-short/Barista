@@ -1,8 +1,6 @@
 .inputs {
-  width: 100%;
-  height: 100px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 input[type="number"] {
@@ -29,21 +27,20 @@ div#textareaWrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  height: 100px;
 }
 div#textareaWrapper > textarea {
   padding: 10px;
+  width: 100%;
 }
 form.checkinForm {
+  width: 90%;
+
   display: grid;
-  grid-template-columns: repeat(2, 200px);
-  grid-template-rows: repeat(3, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  grid-auto-flow: row;
   place-items: center;
 }
-button#checkinButton {
-  grid-area: 3 / 1 / 4 / 3;
-}
+
 div#dropDown > select {
   width: 100%;
   height: 50%;
