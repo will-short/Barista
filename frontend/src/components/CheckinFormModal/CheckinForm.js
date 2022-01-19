@@ -47,7 +47,6 @@ export default function CheckinForm(data) {
       sessionActions.uploadImage(e.target.files[0])
     );
     setImage(uploadedImage);
-    console.log(uploadedImage);
   }
 
   let locationNames = [...new Set(locations.map(({ name }) => name))];

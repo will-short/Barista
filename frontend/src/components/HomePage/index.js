@@ -28,7 +28,7 @@ export default function HomePage() {
 
   let sideBar;
   if (sessionUser) {
-    sideBar = <UserInfo />;
+    sideBar = <UserInfo coords={sessionCoords} />;
   } else {
     sideBar = (
       <article className="logged-out-info">
