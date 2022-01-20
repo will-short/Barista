@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import Geocode from "react-geocode";
 
 const SETUSER = "session/SETUSER";
 const REMOVEUSER = "session/removeUser";
@@ -84,14 +85,26 @@ export const uploadImage = (image) => async (dispatch) => {
 
 //user geo-location
 export const getLocation = () => async (dispatch) => {
-  navigator.geolocation.getCurrentPosition((loca) => {
-    dispatch(
-      setLocation({
-        lat: +loca.coords.latitude,
-        lng: +loca.coords.longitude,
-      })
-    );
-  });
+  navigator.geolocation.getCurrentPosition(
+    (loca) => {
+      dispatch(
+        setLocation({
+          lat: +loca.coords.latitude,
+          lng: +loca.coords.longitude,
+        })
+      );
+    },
+    (error) => {
+      if (error.code == error.PERMISSION_DENIED) {
+        dispatch(
+          setLocation({
+            lat: 41.8781136,
+            lng: -87.6297982,
+          })
+        );
+      }
+    }
+  );
 };
 
 const sessionReducer = (state = { user: null }, action) => {

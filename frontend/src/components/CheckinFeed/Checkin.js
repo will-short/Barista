@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteCheckin, editCheckin } from "../../store/checkins";
 import CommentForm from "../CommentForm";
 import Comment from "../Comment";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Checkin({ data }) {
   let {
@@ -68,7 +68,6 @@ export default function Checkin({ data }) {
     }
     return stars;
   }
-
   return (
     <li>
       <div className="top">
@@ -90,6 +89,7 @@ export default function Checkin({ data }) {
       </div>
       {sessionUser?.id === owner_id && isProfile ? (
         <div id="descriptionDiv">
+          <div></div>
           <input
             type="text"
             name="description"
@@ -106,7 +106,17 @@ export default function Checkin({ data }) {
           </button>
         </div>
       ) : (
-        <div id="descriptionDiv">{description}</div>
+        <div id="descriptionDiv">
+          <div></div>
+          <span>{description}</span>
+          {sessionUser?.id === owner_id ? (
+            <Link id="pencil" to="/profile">
+              <span class="material-icons-outlined">edit</span>
+            </Link>
+          ) : (
+            <div></div>
+          )}
+        </div>
       )}
       <img src={image} alt="" className="checkinImage" />
 

@@ -47,7 +47,6 @@ function SignupForm() {
       sessionActions.uploadImage(e.target.files[0])
     );
     setProfile_image(uploadedImage);
-    console.log(uploadedImage);
   }
 
   return (
