@@ -8,7 +8,6 @@ li.updateComment {
 }
 button.deleteComment {
   height: 70%;
-  width: 15%;
   margin-right: 2%;
   font-size: 15px;
   background-color: maroon;
@@ -19,7 +18,6 @@ button.deleteComment:hover {
 }
 button.updateComment {
   height: 70%;
-  width: 15%;
   margin-left: 2%;
   font-size: 15px;
   margin-bottom: 1%;

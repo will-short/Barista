@@ -10,7 +10,15 @@ div#locations {
   height: calc(100% - 90px);
   display: grid;
   place-items: center;
+  padding-left: 5vw;
+  grid-template-rows: auto 1fr;
+  padding-top: 10vh;
 }
 div.gmnoprint {
   display: none;
+}
+.css-viou3o-MuiAutocomplete-root
+  .MuiFilledInput-root
+  .MuiAutocomplete-endAdornment {
+  top: 0px;
 }

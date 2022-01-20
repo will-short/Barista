@@ -6,19 +6,18 @@ import Geocode from "react-geocode";
 import "./UserInfo.css";
 import { useState } from "react";
 
-export default function UserInfo({ coords }) {
+export default function UserInfo({ coords, city, setCity }) {
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   let { name, profile_image, username, location } = sessionUser;
-  const [city, setCity] = useState("");
+
   useEffect(() => {
     if (coords) {
       Geocode.setApiKey("AIzaSyBynTKh6jKkL6pn5gHvhOIgFjHUXLvVfAA");
       Geocode.setLocationType("ROOFTOP");
       (async () => {
         let cityInfo = await Geocode.fromLatLng(coords?.lat, coords?.lng);
-        let cityExact =
-          cityInfo.results?.[0]?.address_components?.[2]?.long_name;
+        let cityExact = `${cityInfo.results?.[0]?.address_components?.[2]?.long_name}, ${cityInfo.results?.[0]?.address_components?.[5]?.short_name}`;
         if (cityExact) setCity(cityExact);
       })();
     }

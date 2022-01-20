@@ -12,9 +12,11 @@ import DrinksPage from "../DrinksPage";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import * as sessionActions from "../../store/session";
+import { useState } from "react";
 
 export default function HomePage() {
   const dispatch = useDispatch();
+  const [city, setCity] = useState("");
   const sessionUser = useSelector((state) => state.session.user);
   const sessionCoords = useSelector((state) => state.session.coords);
   const checkins = useSelector((state) => state.checkins);
@@ -25,10 +27,9 @@ export default function HomePage() {
       dispatch(getAllLocations(sessionCoords));
     }
   }, [dispatch]);
-
   let sideBar;
   if (sessionUser) {
-    sideBar = <UserInfo coords={sessionCoords} />;
+    sideBar = <UserInfo coords={sessionCoords} city={city} setCity={setCity} />;
   } else {
     sideBar = (
       <article className="logged-out-info">
@@ -73,7 +74,7 @@ export default function HomePage() {
           </div>
         </Route>
         <Route path="/locations">
-          <Locations />
+          <Locations city={city} />
         </Route>
         <Route path="/drinks">
           <DrinksPage />
