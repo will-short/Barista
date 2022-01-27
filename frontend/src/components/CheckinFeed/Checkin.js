@@ -128,7 +128,7 @@ export default function Checkin({ data }) {
           <Comment key={id} data={{ id, content, User }} />
         ))}
       </ul>
-      {formattedComments.length && (
+      {formattedComments.length > 3 && (
         <h4
           onClick={() => {
             setExpand(!expand);

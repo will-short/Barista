@@ -14,7 +14,7 @@ export default function Comment({ data }) {
   const { id, content, User } = data;
   const [value, setValue] = useState(content);
 
-  if (sessionUser?.id !== User?.id || !isProfile)
+  if (sessionUser?.id !== User?.id)
     return (
       <li>
         <img src={User.profile_image} alt="" id="commentImg" />
