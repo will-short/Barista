@@ -1,6 +1,8 @@
 
 
-# Indie-Go By William Short
+# Barista By William Short
+
+## Barista is currently not live. I plan to move to vercel when I have some time
 
 ### [Vist Barista](https://barista-project.herokuapp.com/) 
 
