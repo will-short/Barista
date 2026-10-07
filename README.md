@@ -2,9 +2,7 @@
 
 # Barista By William Short
 
-## Barista is currently not live. I plan to move to vercel when I have some time
-
-### [Vist Barista](https://barista-project.herokuapp.com/) 
+Selected personal project. The hosted demo is currently unavailable; screenshots and architecture notes are preserved below.
 
 **Table of contents**
 * [Overview](#overview)
@@ -14,15 +12,15 @@
 
 <a name="overview"></a>
 # Barista overview
-Barista is a fullstack web-app using [React](https://reactjs.org/), [React-Redux](https://react-redux.js.org/), [Node.js/Express](https://expressjs.com/) and [PostgreSQL](https://www.postgresql.org/)  
+Barista is a full-stack web app using [React](https://reactjs.org/), [React-Redux](https://react-redux.js.org/), [Node.js/Express](https://expressjs.com/) and [PostgreSQL](https://www.postgresql.org/)  
 
-Barista is an Untapped clone where users are able to see local coffee shops and post about drinks they are having.
+Barista is an Untappd-inspired app where users are able to see local coffee shops and post about drinks they are having.
 
 
 Users are able to:
-* Post checkins on what they are currently drinking at local coffe shops.
-* Leave comments on other users checkins.
-* Browse through up to 10 local coffee shops by google map's API.
+* Post checkins on what they are currently drinking at local coffee shops.
+* Leave comments on other users' check-ins.
+* Browse through up to 10 local coffee shops using the Google Maps API.
 
 ## Homepage
 
@@ -34,7 +32,7 @@ Users are able to:
 
 ## Coffee Shops
 
-![gamepage](https://user-images.githubusercontent.com/16979047/148467909-d2f6c29e-15f6-4035-8751-0d5fbb82e1ce.PNG)
+![coffee shops](https://user-images.githubusercontent.com/16979047/148467909-d2f6c29e-15f6-4035-8751-0d5fbb82e1ce.PNG)
 
 # Architecture
 
@@ -47,14 +45,14 @@ Users are able to:
 
 ### Database ([PostgreSQL](https://www.postgresql.org/))
 
-The database for this app was set up to communicate with the server to store data for persistance between sessions and to serve back that data for Checkins, Drinks and Comments details
+The database for this app was set up to communicate with the server to store data for persistence between sessions and to serve back that data for Checkins, Drinks and Comments details
 
 <img src="https://res.cloudinary.com/dc9htgupc/image/upload/v1636975264/samples/r0tsl4rm9wmschhl41zu.png"
   alt="Database Scheme"/>
   
 Sequelize was used to create models to easily store and harvest data from the database.
 
-Game listing model:
+Check-in model:
 ```js
 // in /backend/db/models/checkin.js
 module.exports = (sequelize, DataTypes) => {
@@ -123,7 +121,7 @@ router.post(
 
 ## React ([React](https://reactjs.org/))
 
-The front end of Barista is all based in react.  React is one of the most popular JS frameworks for full stack aplications.  Using React Components with Redux state Barista serves all the data from the backend to be viewed by the user.
+The front end of Barista is all based in react.  React is one of the most popular JS frameworks for full-stack applications.  Using React Components with Redux state Barista serves all the data from the backend to be viewed by the user.
 
 Checkin component:
 
@@ -270,7 +268,7 @@ export default function Checkin({ data }) {
 
 ### Redux Store ([React-Redux](https://react-redux.js.org/))
 
-Redux is used to keep a site wide state for the current logged in user and all game listings.  On application start Redux stores all drinks, while this causes initial load time to be longer it allows for a fast experience with drinks after initial load.  
+Redux is used to keep a site wide state for the current logged in user and all check-ins.  On application start Redux stores all drinks, while this causes initial load time to be longer it allows for a fast experience with drinks after initial load.  
 
 Part of the Redux state tree:
 
@@ -278,7 +276,7 @@ Part of the Redux state tree:
 
 Redux uses Thunks to communicate to the backend and then change state with an Action based on the response
 
-Thunk for `POST` listing:
+Thunk for `POST` check-in:
 ```js
 // in frontend/src/store/checkins.js
 export const postCheckin = (checkin) => async (dispatch) => {
